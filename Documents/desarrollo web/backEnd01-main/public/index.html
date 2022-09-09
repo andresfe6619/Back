@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="estilosChat.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+ 
+
+
+    <form id="Add">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label" >titulo</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="title" required>
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Precio</label>
+          <input type="number" class="form-control" id="exampleInputPassword1" name="price" required>
+        </div>
+        
+         </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Imagen</label>
+          <input type="text" class="form-control" id="exampleInputPassword2" name="thumbnail" required>
+        </div>
+      
+        </div>
+        <button type="submit" id="submitForm"class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">Submit</button>
+      </form>
+       
+
+      <table class="table table-dark table-hover">
+        <thead>
+          <tr>
+         
+            <th scope="col">Titulo</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Imagen</th>
+          </tr>
+        </thead>
+        <tbody id="productos1">
+      
+       
+        </tbody>
+      </table> 
+ <h5>Porcentaje de compresion </h5>
+ <div id="porcentaje"></div>  
+      <form id="messageForm">
+        <input id="Emailinput" type="email" placeholder="Email" required>
+        <input id="nombreinput" type="text" placeholder="nombre" required>
+        <input id="apellidoinput" type="text" placeholder="apellido" required>
+        <input id="edadinput" type="number" placeholder="edad" required>
+        <input id="aliasinput" type="text" placeholder="alias" required>
+        <input id="avatarinput" type="text" placeholder="avatar" required>
+        <input id="messageInput" type="text" placeholder="Mensaje" required>
+        <input type="submit" value="Enviar">
+    
+      </form>
+      <div id="messagesPool"></div>
+
+
+ <script src=" https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" ></script>
+ <script src="/socket.io/socket.io.js"></script>  
+ <script src="/clientSocket.js"></script>
+    
+
+
+
+
+
+
+</body>
+</html>

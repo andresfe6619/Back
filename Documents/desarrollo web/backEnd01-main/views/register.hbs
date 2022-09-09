@@ -1,0 +1,39 @@
+{{#if user}}
+<div>
+<h1 > {{message}} {{welcome}} </h1></div>
+
+<a href="/api/users/inicio" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >Ir a login </a> 
+{{else}}
+   <form action="/api/users/registro" method="POST">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label" > usuario</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username">
+   
+  </div>
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label" >email</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+   
+  </div>
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label" > Primer nombre </label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="firstName">
+   
+  </div>
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label"> apellido </label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="lastName">
+   
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">contraseña</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+  </div>
+  
+   </div>
+  
+  <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">Submit</button>
+</form> 
+  
+  {{/if}}
+

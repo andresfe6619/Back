@@ -1,0 +1,27 @@
+{{#if user}}
+<div>
+<h1 > {{message}} {{welcome}} </h1></div>
+
+<a href="/api/users/registro" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > ir a registro </a> 
+<a href="/api/users/Datos" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > Revisa tus datos </a> 
+<a href="/api/users/logout" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > cerrar sesion </a> 
+{{else}}
+   <form action="/api/users/inicio" method="POST">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label" > usuario</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username">
+   
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">contraseña</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+  </div>
+  
+   </div>
+  
+  <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">enviar</button>
+  <a href="/api/users/registro" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >  registrarse </a> 
+</form> 
+  
+  {{/if}}
+

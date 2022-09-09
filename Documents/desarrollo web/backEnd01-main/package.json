@@ -1,0 +1,59 @@
+{
+  "dependencies": {
+    "@faker-js/faker": "^7.3.0",
+    "admin": "^1.4.1",
+    "autocannon": "^7.9.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "bootstrap": "^5.1.3",
+    "child_process": "^1.0.2",
+    "compression": "^1.7.4",
+    "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "firebase": "^9.9.1",
+    "firebase-admin": "^11.0.0",
+    "forever": "^4.0.3",
+    "knex": "^2.1.0",
+    "moment": "^2.29.3",
+    "mongoose": "^6.4.7",
+    "mui": "^0.0.1",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.16",
+    "normalizr": "^3.6.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "socket.io": "^4.5.1",
+    "sqlite3": "^5.0.8",
+    "winston": "^3.8.2",
+    "yargs": "^17.5.1"
+  },
+  "name": "andres-felipe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+     "setup" : "curl -X GET 'http://localhost:8080/api/desafios/process'",
+    "test" : " node benchmark.js && curl -X GET 'http://localhost:8080/api/desafios/process'", 
+    "start": "nodemon ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andresfe6619/backEnd01.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andresfe6619/backEnd01/issues"
+  },
+  "homepage": "https://github.com/andresfe6619/backEnd01#readme",
+  "keywords": [],
+  "devDependencies": {
+    "handlebars": "^4.5.0"
+  },
+  "description": ""
+}

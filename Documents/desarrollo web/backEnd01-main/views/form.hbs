@@ -1,0 +1,31 @@
+<form action="/api/productos/agregar" method="POST">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label" >titulo</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="title">
+    {{!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> --}}
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Precio</label>
+    <input type="number" class="form-control" id="exampleInputPassword1" name="price">
+  </div>
+  
+   </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Imagen</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" name="thumbnail">
+  </div>
+ <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Descripcion</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" name="descrip">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">stock</label>
+    <input type="number" class="form-control" id="exampleInputPassword1" name="stock">
+  </div>
+
+  {{!-- <div class="mb-3 form-check">
+    <input type="text" class="form-check-input" id="exampleCheck1" name="thumbnail">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label> --}}
+  </div>
+  <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">Submit</button>
+</form>

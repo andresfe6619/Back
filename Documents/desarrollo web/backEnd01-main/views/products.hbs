@@ -1,0 +1,34 @@
+{{#if hasAny}}
+<table class="table table-dark table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titulo</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Imagen</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+   {{#each prods}}
+    <tr>
+      <th scope="row">{{id}}</th>
+      <td>{{title}}</td>
+      <td>{{price}}</td>
+      <td>
+      <img src={{thumbnail}} width="100" height="100"></img></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table> 
+<a href="/api/home" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >volver al formulario </a> 
+{{else}}
+    
+    <div class="d-flex align-items-center">
+  <strong>No hay productos</strong>
+  <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+</div>
+<div class="d-grid gap-2">
+<a href="/api/home" class="btn btn-dark " tabindex="-1" role="button" aria-disabled="true">volver al formulario </a> 
+</div>
+  {{/if}}

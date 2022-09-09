@@ -1,0 +1,13 @@
+{{#if user}}
+<div>
+<h1 > {{message}}  </h1></div>
+
+<a href="/api/users/adios" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >Volver a login </a> 
+{{else}}
+  <div>
+<h1 > {{message}}  </h1></div>
+
+<a href="/api/users/adios" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >Volver a sign up </a> 
+
+
+  {{/if}}
