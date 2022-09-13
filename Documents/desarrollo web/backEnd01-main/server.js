@@ -8,7 +8,7 @@ import MongoStore from "connect-mongo";
 import bcrypt from 'bcrypt';
 import passport from 'passport';
 import {Strategy as LocalStrategy} from 'passport-local';
-import {usersSchema} from "./models/usersModel.js";
+import {usersSchema} from "./Models/usersModel.js";
 const app = express();
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
