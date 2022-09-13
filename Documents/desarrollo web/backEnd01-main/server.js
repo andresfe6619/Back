@@ -56,7 +56,7 @@ function comparePass(password, hash){
     return bcrypt.compareSync(password, hash);
 }
 
-const expressServer= app.listen(port, (err) => {
+const expressServer= app.listen(process.env.PORT || port , (err) => {
   if(!err){
     logger.info(`Servidor corriendo en el puerto ${port}`);
   } else{
