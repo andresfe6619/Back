@@ -37,8 +37,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-     "setup" : "curl -X GET 'http://localhost:8080/api/desafios/process'",
-    "test" : " node benchmark.js && curl -X GET 'http://localhost:8080/api/desafios/process'", 
+    "setup": "curl -X GET 'http://localhost:8080/api/desafios/process'",
+    "test": " node benchmark.js && curl -X GET 'http://localhost:8080/api/desafios/process'",
     "start": "nodemon ./server.js"
   },
   "repository": {

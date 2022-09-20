@@ -1,3 +1,4 @@
+import multer from "multer"
 import {logger} from "../logs/loggers.js"
 function getRoot (req, res) {}
 function getLogin(req, res) {
@@ -85,6 +86,16 @@ function getLogin(req, res) {
         }
     }
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'Avatars')
+  },
+  filename: (req, file, cb) => {
+      var userSes = req.body
+    cb(null, userSes.username)
+  }
+})
+const upload = multer({ storage })
 
 
   export  {
@@ -98,5 +109,6 @@ function getLogin(req, res) {
     postSignup,
     getFailsignup,
     checkAuthentication,
-    getDatos
+    getDatos,
+    upload
 };

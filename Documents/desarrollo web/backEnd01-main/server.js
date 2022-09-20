@@ -106,8 +106,11 @@ const register = new LocalStrategy(
         email: req.body.email,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+        Age: req.body.Age,
+        phone: req.body.country + req.body.phone
+      
       };
-
+console.log(newUser)
       const createdUser = await usersSchema.create(newUser);
 
       done(null, createdUser);
