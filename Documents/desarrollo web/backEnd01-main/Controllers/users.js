@@ -85,14 +85,26 @@ function getLogin(req, res) {
             res.render("userForm", {welcome: "", user: false} );
         }
     }
-
+  var date = new Date();
+    var components = [
+        date.getYear(),
+        date.getMonth(),
+        date.getDate(),
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds(),
+        date.getMilliseconds()
+    ];
+    
+    var idAvatar = `${components.join("")}.jpg`
+    
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, 'Avatars')
   },
   filename: (req, file, cb) => {
-      var userSes = req.body
-    cb(null, userSes.username)
+  
+    cb(null, idAvatar)
   }
 })
 const upload = multer({ storage })
@@ -110,5 +122,7 @@ const upload = multer({ storage })
     getFailsignup,
     checkAuthentication,
     getDatos,
-    upload
-};
+    upload,
+    idAvatar
+
+  };

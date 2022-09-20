@@ -26,7 +26,7 @@ import chatDao from './DB/mongoChat/ChatDao.js';
 const chat = new chatDao();
 import {logger} from "./logs/loggers.js"
 import compression from "compression"
-
+import {idAvatar} from "./Controllers/users.js"
 if (mode === "cluster" && cluster.isPrimary){
 os.cpus().map(() => {
   cluster.fork();
@@ -107,8 +107,8 @@ const register = new LocalStrategy(
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         Age: req.body.Age,
-        phone: req.body.country + req.body.phone
-      
+        phone: req.body.country + req.body.phone,
+        avatar : idAvatar
       };
 console.log(newUser)
       const createdUser = await usersSchema.create(newUser);
