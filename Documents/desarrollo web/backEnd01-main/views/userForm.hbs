@@ -1,10 +1,22 @@
 {{#if user}}
+
+<div class="avatars">
+<img src="{{Avatar}}" width="10" height="10">
+</div>
 <div>
-<h1 > {{message}} {{welcome}} </h1></div>
+<h1 > {{message}}</h1>
+ <h1>{{welcome}} </h1>
+<h1>{{phone}}</h1>
+ <h1> {{Age}}</h1>
+<h1>{{firstName}}</h1>
+<h1> {{lastName}}</h1>
+</div>
 
 <a href="/api/users/registro" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > ir a registro </a> 
-<a href="/api/users/Datos" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > Revisa tus datos </a> 
+
 <a href="/api/users/logout" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > cerrar sesion </a> 
+<a href="/api/users/home"  class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > ir a home </a> 
+<a href="/api/productos/Listado" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > ir de compras </a> 
 {{else}}
    <form action="/api/users/inicio" method="POST">
   <div class="mb-3">

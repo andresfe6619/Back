@@ -1,5 +1,11 @@
 import multer from "multer"
+import {createTransport} from "nodemailer"
+import dotenv from "dotenv"
 import {logger} from "../logs/loggers.js"
+dotenv.config({path: ".env"})
+
+
+
 function getRoot (req, res) {}
 function getLogin(req, res) {
     if (req.isAuthenticated()) {
@@ -25,7 +31,7 @@ function getLogin(req, res) {
     var userSes = req.user;
     if (userSes) {
         
-      res.render("userForm", {welcome: userSes.username, message: "bienvenido", user: true} );}
+      res.render("userForm", {welcome: userSes.username, message: "bienvenido", Avatar: userSes.avatar, user: true} );}
         else {
             res.render("userForm", {welcome: "", user: false} );
         }
@@ -80,7 +86,11 @@ function getLogin(req, res) {
     
     if (userSes) {
        logger.info("usuario logueado"); 
-      res.render("userForm", {welcome:`nombre de usuario: ${userSes.username}` , message:`email : ${userSes.email}, `, user: true} );}
+      res.render("userForm", {welcome:`nombre de usuario: ${userSes.username}` , message:`email : ${userSes.email}, `,
+      phone: `telefono: ${userSes.phone}`, Age: `edad: ${userSes.Age}`, firstName: `Nombre :${userSes.firstName}`, lastName: `Apellido: ${userSes.lastName}`,
+      Avatar: userSes.avatar,
+      Directions:`direccion: ${userSes.Direction}`,
+      user: true} );}
         else {
             res.render("userForm", {welcome: "", user: false} );
         }

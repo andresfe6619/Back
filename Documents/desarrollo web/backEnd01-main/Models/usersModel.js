@@ -8,5 +8,7 @@ export const usersSchema = mongoose.model('users', {
     lastName : {type: String, required: true},
     Age: {type: Number, required: true },
     phone: {type: Number, required: true},
+    Direction: {type: String, required: true},
     avatar: {type: String, required: true}
+
 });

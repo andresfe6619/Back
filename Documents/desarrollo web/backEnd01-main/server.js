@@ -1,5 +1,6 @@
 import {port, mode} from "./yargs.js" 
 import express from 'express';
+import {createTransport} from "nodemailer"
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import os from "os"
@@ -90,6 +91,16 @@ app.use(
 );
 app.use (passport.initialize());
 app.use (passport.session());
+const transporter = createTransport({
+  service: "gmail",
+  port: 587,
+  auth :{
+    user: process.env.TEST_MAIL,
+    pass: process.env.PASSWORD
+  }
+})
+
+
 const register = new LocalStrategy(
   { passReqToCallback: true },
   async (req, username, password, done) => {
@@ -108,10 +119,37 @@ const register = new LocalStrategy(
         lastName: req.body.lastName,
         Age: req.body.Age,
         phone: req.body.country + req.body.phone,
-        avatar : idAvatar
+        avatar : idAvatar,
+        Direction : req.body.direccion
       };
-console.log(newUser)
-      const createdUser = await usersSchema.create(newUser);
+
+const mailOps=  {
+ from : "server Node.js",
+ to : process.env.MAIL,
+ subject: "Nuevo usuario",
+ html : `<div>Nombre de usuario : ${newUser.username}</div>
+ <div>contraseña (encriptada) : ${newUser.password}</div>
+ <div>email : ${newUser.email}</div>
+ <div>primer nombre : ${newUser.firstName}</div>
+ <div>apellido : ${newUser.lastName}</div>
+ <div>edad : ${newUser.Age}</div>
+ <div>telefono : ${newUser.phone}</div>
+ <div>Avatar : ${newUser.avatar}</div>
+ <div>Direccion : ${newUser.Direction}</div>
+ ` ,
+//  attachments: [{
+// path: new URL(`./Avatars/${idAvatar}`, import.meta.url).pathname
+// }]
+    
+}
+        
+           
+
+const createdUser = await usersSchema.create(newUser);
+const message = transporter.sendMail(mailOps)
+
+console.log(message)
+
 
       done(null, createdUser);
     } catch (err) {

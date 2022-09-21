@@ -19,7 +19,7 @@ router.get("/registro", getSignup).post(
 router.get("/Error-sign", getFailsignup);
 router.use(checkAuthentication)
 router.use(express.static(path.join(__dirname, "../Avatars")))
-router.get("/Datos" , getDatos); 
+router.get("/home" , getDatos); 
 
 
 
