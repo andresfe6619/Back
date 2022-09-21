@@ -1,4 +1,5 @@
 import {port, mode} from "./yargs.js" 
+import {saveCart } from "./Controllers/route-controller-dao/CartController.js";
 import express from 'express';
 import {createTransport} from "nodemailer"
 import cookieParser from "cookie-parser";
@@ -110,7 +111,7 @@ const register = new LocalStrategy(
       if (existingUser) {
         return done(null, null);
       }
-
+      const userCart= await saveCart()
       const newUser = {
         username,
         password: cryptPass(password),
@@ -120,7 +121,8 @@ const register = new LocalStrategy(
         Age: req.body.Age,
         phone: req.body.country + req.body.phone,
         avatar : idAvatar,
-        Direction : req.body.direccion
+        Direction : req.body.direccion,
+        UserCart : userCart
       };
 
 const mailOps=  {

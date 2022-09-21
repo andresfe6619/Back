@@ -5,7 +5,7 @@ const saveCart = async (req, res) => {
     try {
         const resultado = await CarroDao.saveCartCont();
         logger.info("id del carrito"+ resultado)
-        res.send(`id del carrito ${resultado}`);
+        return resultado 
     } catch (error) {
         logger.error('Ocurrio el siguiente error al querer crear un nuevo CarroDao', error);
         res.sendStatus(500);

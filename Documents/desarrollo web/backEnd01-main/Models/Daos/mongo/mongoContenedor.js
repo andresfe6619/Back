@@ -53,6 +53,7 @@ async getAll () {
         const nuevoCarrito = { timestamp: "", productos: []};
         let resultado = await this.saveObject(nuevoCarrito);
         return resultado.id;
+   
     }
 
     async saveInCart ( idCart, elemento) {

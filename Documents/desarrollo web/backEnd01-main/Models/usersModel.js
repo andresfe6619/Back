@@ -9,6 +9,6 @@ export const usersSchema = mongoose.model('users', {
     Age: {type: Number, required: true },
     phone: {type: Number, required: true},
     Direction: {type: String, required: true},
-    avatar: {type: String, required: true}
-
+    avatar: {type: String, required: true},
+    UserCart: {type: String, required: true}
 });
