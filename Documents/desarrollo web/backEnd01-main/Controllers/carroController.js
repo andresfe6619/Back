@@ -74,8 +74,9 @@ const filterId= async(req, res) => {
 
  const getAllFromCarro= async(req, res) => {
     try {
+        const id = req.user.UserCart;
         const prods = await Objeto5.getAll()
-        const {id} = req.params;
+        //const {id} = req.params;
         const product = await Objeto5.getById(id);
         logger.info(prods)
         res.json(prods)
