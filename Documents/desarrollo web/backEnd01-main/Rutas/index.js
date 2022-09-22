@@ -10,14 +10,14 @@ import Productos from "./Productos.js";
 import Users from "./Users.js";
 
 
-router.get('/home', (req, res) => {
-  //handlebars
-    res.render("form")  
+// router.get('/home', (req, res) => {
+//   //handlebars
+//     res.render("form")  
    
 
 
 
-});
+// });
 let visitas=0
 router.use((req, res, next) => {
     visitas++

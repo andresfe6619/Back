@@ -9,7 +9,8 @@ const showAll = async(req, res) => {
      
             const prods = await ProductDao.getAll()
             logger.info(prods)
-            res.json(prods);
+            res.json(prods)
+            //res.render("products", {prods : prods, title: prods.title , hasAny: true} );
             // if (prods.length == 0) {
             //     res.render("products", {prods, });
             // } else{

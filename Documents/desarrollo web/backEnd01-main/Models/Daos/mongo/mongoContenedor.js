@@ -9,7 +9,8 @@ class contenedorMongo {
 
 } 
 async getAll () {
-    const docs = await this.collection.find({}, { __v: 0 });
+    const docs = await this.collection.find();
+   
     return docs;
     }
 
@@ -60,7 +61,7 @@ async getAll () {
         let resultado;
         let tempCart = await this.getById(idCart);
         if ( tempCart ){
-         elemento._id  = tempCart.productos.length + 1;   
+         //elemento._id  = tempCart.productos.length + 1;   
             tempCart.productos.push( elemento);
             await this.updateById(idCart, tempCart);
             resultado = `Producto : ${elemento.title},  ha sido añadido correctamente al cart con ID ${idCart}`;

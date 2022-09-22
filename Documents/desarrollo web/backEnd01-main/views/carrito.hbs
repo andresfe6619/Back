@@ -1,0 +1,16 @@
+
+
+
+<h1>TU CARRITO </h1>
+<h2 > {{Carro}}  </h2>
+{{#if Carrito}}
+
+<h1>{{Productos}}</h1>
+<a href="/api/users/terminar" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >Terminar compra </a> 
+{{else}}
+  
+<h2>Aun no tienes productos en tu carrito </h2>
+<a href="/api/productos/Listado" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > ir de compras </a> 
+
+
+  {{/if}}
