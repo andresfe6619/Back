@@ -31,8 +31,10 @@ const getAllFromCarro = async (req, res) => {
     try {
         const id = req.user.UserCart
         let resultado = await CarroDao.getById(id);
-        logger.info(resultado,  resultado.productos)
-        res.render("carrito",{Carro : resultado.id, Productos : resultado.productos , Carrito: true  } );
+        logger.info(resultado.productos.title)
+        let productos = JSON.stringify(resultado.productos)
+        res.render("carrito",{Carro : resultado.id, Productos : productos, Carrito: true  } );
+    
     } catch (error) {
         logger.error('Ocurrio el siguiente error al querer obtener los productos del CarroDao', error);
         res.sendStatus(500);
