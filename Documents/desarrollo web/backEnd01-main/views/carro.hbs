@@ -1,0 +1,10 @@
+<h1>TU CARRITO</h1>
+<h2>{{Carro}}</h2>
+<form action="/api/carro/terminar" enctype="multipart/form-data" method="POST">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label" > Tu producto</label>
+    <input type="text" class="form-control" value="{{Productos}}" id="pedidos" aria-describedby="emailHelp" name="pedidos">
+   
+  
+  <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">Submit</button>
+</form> 

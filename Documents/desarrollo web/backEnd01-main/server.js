@@ -1,7 +1,7 @@
 import {port, mode} from "./yargs.js" 
 import {saveCart } from "./Controllers/route-controller-dao/CartController.js";
 import express from 'express';
-import {createTransport} from "nodemailer"
+import {transporter} from "./Controllers/Gmail-Wpp.js"
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import os from "os"
@@ -92,15 +92,6 @@ app.use(
 );
 app.use (passport.initialize());
 app.use (passport.session());
-const transporter = createTransport({
-  service: "gmail",
-  port: 587,
-  auth :{
-    user: process.env.TEST_MAIL,
-    pass: process.env.PASSWORD
-  }
-})
-
 
 const register = new LocalStrategy(
   { passReqToCallback: true },
@@ -150,7 +141,7 @@ const mailOps=  {
 const createdUser = await usersSchema.create(newUser);
 const message = transporter.sendMail(mailOps)
 
-console.log(message)
+
 
 
       done(null, createdUser);

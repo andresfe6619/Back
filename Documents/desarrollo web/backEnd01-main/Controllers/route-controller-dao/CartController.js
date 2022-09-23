@@ -1,6 +1,7 @@
 import { CarroDao } from "../../Models/Daos/indexDao.js";
 import {logger} from "../../logs/loggers.js";
 import {filterId} from "./productController.js"
+import {transporter, sendWpp} from "../Gmail-Wpp.js";
 import { ProductDao } from "../../Models/Daos/indexDao.js";
 const saveCart = async (req, res) => {
     try {
@@ -27,19 +28,90 @@ const deleteById = async (req, res) => {
         res.sendStatus(500);
     }
 }
+const ArrayPedidos=[]
+
 const getAllFromCarro = async (req, res) => {
     try {
         const id = req.user.UserCart
         let resultado = await CarroDao.getById(id);
-        logger.info(resultado.productos.title)
-        let productos = JSON.stringify(resultado.productos)
-        res.render("carrito",{Carro : resultado.id, Productos : productos, Carrito: true  } );
-    
+        let productos = resultado.productos
+        let prueba = resultado.productos[0].title
+        let precio = resultado.productos[0].price
+        let idP = resultado.productos[0]._id
+        let pedido = {title: prueba, price: precio, id : idP}
+        if (productos.length = 0){
+         res.render("carrito")
+
+        }else{
+        //let productos = JSON.stringify(resultado.productos)       
+        ArrayPedidos.push(prueba)
+        res.render("carro",{Carro : resultado.id, Productos : prueba, Carrito: true  } );
+        // const  Pedido = document.querySelector("#Pedido") 
+        // function submitHandler (e) {
+        //     e.preventDefault()
+        //     console.log("button is working")
+        
+        // }
+        // Pedido.addEventListener("submit", submitHandler)
+        // }
+        }
+
     } catch (error) {
         logger.error('Ocurrio el siguiente error al querer obtener los productos del CarroDao', error);
         res.sendStatus(500);
     }
 }
+
+
+const order = async (req, res) => {
+
+const mailOps = {
+    
+        from : "server Node.js",
+        to : process.env.MAIL,
+        subject: "Nuevo pedido",
+        html : `<div>Nombre de usuario : ${req.user.username}</div>
+        <div>email : ${req.user.email}</div>
+        <div>telefono : ${req.user.phone}</div>
+        <div> Id del carro : ${req.user.UserCart}</div>
+        <div>Direccion : ${req.user.Direction}</div>
+        <div> Pedido(s):${ArrayPedidos} </div>
+        ` ,
+     
+       }
+
+       
+
+
+res.redirect("/api/users/home")
+
+
+try {
+  const body = `Hola, tienes un nuevo pedido del carrito con id : ${req.user.UserCart} y el pedido es: ${ArrayPedidos}`
+if (req.user.phone === process.env.TO){
+
+const wpp = await sendWpp(body, req.user.phone)  
+logger.warn("El numero proporcionado no es el numero registrado +573193129782")} 
+else{
+const wpp = await sendWpp(body, process.env.TO) 
+}
+
+const message = transporter.sendMail(mailOps)
+}catch(error){
+    logger.error(error)
+}
+
+}
+
+
+const terminarCompra = async (req, res) =>{
+
+res.render("terminar")
+
+}
+
+
+
 const addProductById = async (req, res) => {
     try {
         
@@ -48,7 +120,7 @@ const addProductById = async (req, res) => {
         
         let resultado = await CarroDao.saveInCart(id, product);
         logger.info(resultado)
-        res.redirect("/Listado")
+        res.redirect("/api/carro/Listado")
     } catch (error) {
         logger.error('Ocurrio el siguiente error al querer agregar productos al CarroDao', error);
         res.sendStatus(500);
@@ -70,4 +142,4 @@ const deleteByIdCart = async (req, res) => {
     }
 }
 
- export { getAllFromCarro, addProductById, deleteById, deleteByIdCart, saveCart, adding }
+ export { getAllFromCarro, addProductById, deleteById, deleteByIdCart, saveCart, adding, order, terminarCompra }
