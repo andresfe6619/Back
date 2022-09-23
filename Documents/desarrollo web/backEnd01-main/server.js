@@ -1,7 +1,7 @@
 import {port, mode} from "./yargs.js" 
 import {saveCart } from "./Controllers/route-controller-dao/CartController.js";
 import express from 'express';
-import {transporter} from "./Controllers/Gmail-Wpp.js"
+import {sendGmail} from "./Controllers/Gmail-Wpp.js"
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import os from "os"
@@ -29,7 +29,7 @@ const chat = new chatDao();
 import {logger} from "./logs/loggers.js"
 import compression from "compression"
 import {idAvatar} from "./Controllers/users.js"
-if (mode === "cluster" && cluster.isPrimary){
+if (process.env.MODE === "cluster" && cluster.isPrimary){
 os.cpus().map(() => {
   cluster.fork();
 }
@@ -116,30 +116,20 @@ const register = new LocalStrategy(
         UserCart : userCart
       };
 
-const mailOps=  {
- from : "server Node.js",
- to : process.env.MAIL,
- subject: "Nuevo usuario",
- html : `<div>Nombre de usuario : ${newUser.username}</div>
- <div>contraseña (encriptada) : ${newUser.password}</div>
- <div>email : ${newUser.email}</div>
- <div>primer nombre : ${newUser.firstName}</div>
- <div>apellido : ${newUser.lastName}</div>
- <div>edad : ${newUser.Age}</div>
- <div>telefono : ${newUser.phone}</div>
- <div>Avatar : ${newUser.avatar}</div>
- <div>Direccion : ${newUser.Direction}</div>
- ` ,
-//  attachments: [{
-// path: new URL(`./Avatars/${idAvatar}`, import.meta.url).pathname
-// }]
-    
-}
+
         
            
-
+sendGmail("Nuevo usuario",`<div>Nombre de usuario : ${newUser.username}</div>
+<div>contraseña (encriptada) : ${newUser.password}</div>
+<div>email : ${newUser.email}</div>
+<div>primer nombre : ${newUser.firstName}</div>
+<div>apellido : ${newUser.lastName}</div>
+<div>edad : ${newUser.Age}</div>
+<div>telefono : ${newUser.phone}</div>
+<div>Avatar : ${newUser.avatar}</div>
+<div>Direccion : ${newUser.Direction}</div>`)
 const createdUser = await usersSchema.create(newUser);
-const message = transporter.sendMail(mailOps)
+
 
 
 

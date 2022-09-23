@@ -1,7 +1,7 @@
 import { CarroDao } from "../../Models/Daos/indexDao.js";
 import {logger} from "../../logs/loggers.js";
 import {filterId} from "./productController.js"
-import {transporter, sendWpp} from "../Gmail-Wpp.js";
+import {sendGmail, sendWpp} from "../Gmail-Wpp.js";
 import { ProductDao } from "../../Models/Daos/indexDao.js";
 const saveCart = async (req, res) => {
     try {
@@ -65,22 +65,6 @@ const getAllFromCarro = async (req, res) => {
 
 const order = async (req, res) => {
 
-const mailOps = {
-    
-        from : "server Node.js",
-        to : process.env.MAIL,
-        subject: "Nuevo pedido",
-        html : `<div>Nombre de usuario : ${req.user.username}</div>
-        <div>email : ${req.user.email}</div>
-        <div>telefono : ${req.user.phone}</div>
-        <div> Id del carro : ${req.user.UserCart}</div>
-        <div>Direccion : ${req.user.Direction}</div>
-        <div> Pedido(s):${ArrayPedidos} </div>
-        ` ,
-     
-       }
-
-       
 
 
 res.redirect("/api/users/home")
@@ -93,10 +77,17 @@ if (req.user.phone === process.env.TO){
 const wpp = await sendWpp(body, req.user.phone)  
 logger.warn("El numero proporcionado no es el numero registrado +573193129782")} 
 else{
-const wpp = await sendWpp(body, process.env.TO) 
+   logger.info("enviando mensaje")
+    const wpp = await sendWpp(body, process.env.TO) 
 }
 
-const message = transporter.sendMail(mailOps)
+sendGmail("Nuevo pedido",`<div>Nombre de usuario : ${req.user.username}</div>
+<div>email : ${req.user.email}</div>
+<div>telefono : ${req.user.phone}</div>
+<div> Id del carro : ${req.user.UserCart}</div>
+<div>Direccion : ${req.user.Direction}</div>
+<div> Pedido(s):${ArrayPedidos} </div>
+`  )
 }catch(error){
     logger.error(error)
 }

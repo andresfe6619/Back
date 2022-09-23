@@ -14,7 +14,7 @@ const transporter = createTransport({
 
 
 
-const accountSID= process.env.SID 
+const accountSID= process.env.SID
 const authToken= process.env.TWILIO_AUTH
 
 const client = twilio(accountSID, authToken)
@@ -35,4 +35,14 @@ try{
 }
 
 
-export {transporter, sendWpp}
+const sendGmail = async (subject, html) => {
+const mailOps=  {
+  from : "server Node.js",
+  to : process.env.MAIL,
+  subject: subject,
+  html : html
+}
+
+ const message = transporter.sendMail(mailOps)
+}
+export {transporter, sendWpp,sendGmail }
