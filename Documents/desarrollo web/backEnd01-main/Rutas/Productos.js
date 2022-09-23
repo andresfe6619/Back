@@ -5,13 +5,14 @@ import {showAll, newProduct, filterId, updateById, deleteById}  from"../Controll
 import test from "../Controllers/productsFaker.js";
 import checkAdmin from "../middlewares/chekAdmin.js";
 const ADMIN= false
-
+import  { checkAuthentication} from "../Controllers/users.js";
 const checking = checkAdmin(ADMIN)
 
 router.get("/Listado/:id" , filterId)
 router.get ("/Listado", showAll)
 
 router.use(checking)
+router.use(checkAuthentication)
 router.post("/agregar",  newProduct)
 router.put('/Listado/:id', updateById)
 router.delete('/Listado/:id', deleteById)
