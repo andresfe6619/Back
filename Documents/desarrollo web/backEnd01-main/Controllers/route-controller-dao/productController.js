@@ -1,4 +1,4 @@
-import { ProductDao } from "../../Models/Daos/indexDao.js";
+import { productService } from "../../services/Product.service.js";
 import bodyParser from 'body-parser';
 import {Router} from 'express';
 import {logger} from "../../logs/loggers.js" 
@@ -7,22 +7,16 @@ const showAll = async(req, res) => {
     try {
        
      
-            const prods = await ProductDao.getAll()
+            const prods = await productService.getAll()
             logger.info(prods)
             res.json(prods)
-            //res.render("products", {prods : prods, title: prods.title , hasAny: true} );
-            // if (prods.length == 0) {
-            //     res.render("products", {prods, });
-            // } else{
-            // res.render("products", {prods, hasAny: true});
-            // }
+         
             
        
         } catch (error) {
-            const prods = await ProductDao.getAll()
+            const prods = await productService.getAll()
             logger.error(error)
             res.json(prods);
-            //res.render("products", {prods, hasAny: false});
           
         
         
@@ -35,7 +29,7 @@ const showAll = async(req, res) => {
     const newProduct= (req, res) => {
         try {
     
-           ProductDao.saveObject(req.body);
+         productService.saveObject(req.body);
           logger.info("product saved")
             res.redirect("/api/productos/Listado");
         } catch (error) {
@@ -47,7 +41,7 @@ const showAll = async(req, res) => {
     const filterId= async(req, res) => {
          try {
              const {id} = req.params;
-             const product = await ProductDao.getById(id);
+             const product = await productService.getById(id);
              logger.info(product)
              res.json(product)
          } catch (error) {
@@ -62,7 +56,7 @@ const showAll = async(req, res) => {
          try {
             const {id} = req.params;
             const newProd = req.body;
-            await ProductDao.updateById(id, newProd);
+            await productService.updateById(id, newProd);
             logger.info(newProd)
             res.json(newProd);
          } catch (error) {
@@ -74,7 +68,7 @@ const showAll = async(req, res) => {
     const deleteById= async(req, res) => {
         try {
             const {id} = req.params;
-            await ProductDao.deleteById(id);
+            await productService.deleteById(id);
             logger.info(`El producto con id ${id} ha sido eliminado`)
             res.json(`El producto con id ${id} ha sido eliminado`);
         }catch (error) {

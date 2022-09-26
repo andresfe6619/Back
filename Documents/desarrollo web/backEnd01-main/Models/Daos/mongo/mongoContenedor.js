@@ -20,7 +20,6 @@ async getAll () {
     }
 
     async saveObject (elemento) {
-        elemento.timestamp = new Date().toLocaleString("fr-FR");
         const nuevoElemento = new this.collection(elemento);
         let nuevoElementoGuardado = await nuevoElemento.save();
         return(nuevoElementoGuardado);
