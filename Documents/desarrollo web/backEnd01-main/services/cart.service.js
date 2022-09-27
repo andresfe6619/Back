@@ -1,35 +1,36 @@
-import {carroDao} from "../Models/Daos/indexDao"
+import {CarroDao} from "../Models/Daos/indexDao.js"
 
 const getAll = async () => {
-    const data = await carroDao.getAll();
+    const data = await CarroDao.getAll();
 
     return data;
 }
 const getById = async (cart) => {
-    const result = carroDao.getById(cart);
+    const result = CarroDao.getById(cart);
 
     return result
 
 
 }
-const saveCart = async () => {
-    const nuevoCarrito = { timestamp: "", productos: []};
-    const newCart = carroDao.saveCartCont(nuevoCarrito) 
+const saveCart = async (date) => {
+    const nuevoCarrito = { timestamp: date, productos: []};
+    const newCart = await CarroDao.saveCartCont(nuevoCarrito) 
+    console.log(date)
     return newCart
 }
 const deleteById = async (IdToDelete) => {
-    const Deleted12 = await carroDao.deleteById(IdToDelete)
+    const Deleted12 = await CarroDao.deleteById(IdToDelete)
     return Deleted12
 }
 
 const saveInCart = async (idCart, product) => {
     
-    let cart = await carroDao.getById(idCart)
+    let cart = await CarroDao.getById(idCart)
     let resultado;
     if ( cart ){
      //elemento._id  = tempCart.productos.length + 1;   
-        tempCart.productos.push( elemento);
-        await carroDao.updateById(idCart, cart);
+        cart.productos.push( product);
+        await CarroDao.updateById(idCart, cart);
         resultado = `Producto : ${product.title},  ha sido añadido correctamente al cart con ID ${idCart}`;
     } else {
         resultado = "El id de carrito no existe";
@@ -41,7 +42,7 @@ const saveInCart = async (idCart, product) => {
 const eraseFromCart = async (idCart, idProduct) =>{
 
   let resultado;
-        let tempCart = await carroDao.getById(idCart);
+        let tempCart = await CarroDao.getById(idCart);
         if (tempCart){
             let arrayProducts = tempCart.productos;
             let index = arrayProducts.findIndex(x => x._id == idProduct);

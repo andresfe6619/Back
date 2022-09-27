@@ -1,7 +1,4 @@
 import bcrypt from 'bcrypt';
-
-import {usersSchema} from "./usersModel.js";
-
 import {usersSchema} from "../usersModel.js"
 function cryptPass(password){
     const salt = bcrypt.genSaltSync(10);

@@ -2,6 +2,8 @@ import multer from "multer"
 import {Strategy as LocalStrategy} from 'passport-local';
 import {sendGmail} from "../services/Gmail-Wpp.js"
 import {findName, createUser, comparePass, cryptPass} from "../Models/Daos/users.Dao.js"
+import {logger} from "../logs/loggers.js"
+import {CartService} from "./cart.service.js"
 var date = new Date();
     var components = [
         date.getYear(),
@@ -36,7 +38,7 @@ const register = new LocalStrategy(
         if (existingUser) {
           return done(null, null);
         }
-        const userCart= await saveCart()
+        const userCart= await CartService.saveCart(date)
         const newUser = {
           username,
           password: cryptPass(password),

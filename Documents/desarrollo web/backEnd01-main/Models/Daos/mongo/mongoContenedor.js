@@ -49,9 +49,10 @@ async getAll () {
         return resultado;
     }
     
-    async saveCartCont (newCart) {
+    async saveCartCont (nuevoCarrito) {
         
-        let resultado = await this.saveObject(newCart);
+        
+        let resultado = await this.saveObject(nuevoCarrito);
         return resultado.id;
    
     }
