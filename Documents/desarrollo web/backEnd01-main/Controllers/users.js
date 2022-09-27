@@ -1,5 +1,4 @@
-import multer from "multer"
-import {createTransport} from "nodemailer"
+
 import dotenv from "dotenv"
 import {logger} from "../logs/loggers.js"
 dotenv.config({path: ".env"})
@@ -95,29 +94,6 @@ function getLogin(req, res) {
             res.render("userForm", {welcome: "", user: false} );
         }
     }
-  var date = new Date();
-    var components = [
-        date.getYear(),
-        date.getMonth(),
-        date.getDate(),
-        date.getHours(),
-        date.getMinutes(),
-        date.getSeconds(),
-        date.getMilliseconds()
-    ];
-    
-    var idAvatar = `${components.join("")}.jpg`
-    
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-      cb(null, 'Avatars')
-  },
-  filename: (req, file, cb) => {
-  
-    cb(null, idAvatar)
-  }
-})
-const upload = multer({ storage })
 
 
   export  {
@@ -132,7 +108,4 @@ const upload = multer({ storage })
     getFailsignup,
     checkAuthentication,
     getDatos,
-    upload,
-    idAvatar
-
   };

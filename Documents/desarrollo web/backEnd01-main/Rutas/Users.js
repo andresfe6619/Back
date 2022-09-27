@@ -8,7 +8,8 @@ const __dirname = path.dirname(__filename);
 
 const router = new Router();
 // import { newUser, result, destroyUser, checkCookie} from "../Controllers/cookies.js";
-import  {getDatos, getLogin, postLogin, getFaillogin, getLogout, failRoute, getSignup, postSignup, getFailsignup, checkAuthentication, upload} from "../Controllers/users.js";
+import {upload} from "../services/users.service.js"
+import  {getDatos, getLogin, postLogin, getFaillogin, getLogout, failRoute, getSignup, postSignup, getFailsignup, checkAuthentication} from "../Controllers/users.js";
 router.get("/inicio",getLogin ).post("/inicio", passport.authenticate("login", {failureRedirect: "/api/users/Error-log"}), postLogin )
 router.get("/Error-log", getFaillogin )
 router.get("/registro", getSignup).post(

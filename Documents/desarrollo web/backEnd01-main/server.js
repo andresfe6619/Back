@@ -1,7 +1,8 @@
 import {port, mode} from "./yargs.js" 
 import {saveCart } from "./Controllers/route-controller-dao/CartController.js";
 import express from 'express';
-import {sendGmail} from "./Controllers/Gmail-Wpp.js"
+import {sendGmail} from "./services/Gmail-Wpp.js"
+import {login, register} from ""
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import os from "os"
@@ -28,7 +29,7 @@ import chatDao from './DB/mongoChat/ChatDao.js';
 const chat = new chatDao();
 import {logger} from "./logs/loggers.js"
 import compression from "compression"
-import {idAvatar} from "./Controllers/users.js"
+import {idAvatar, login, register} from "./services/users.service.js"
 if (process.env.MODE === "cluster" && cluster.isPrimary){
 os.cpus().map(() => {
   cluster.fork();
@@ -49,14 +50,14 @@ app.use((req, res, next)=>{
 
 
 
-  function cryptPass(password){
-    const salt = bcrypt.genSaltSync(10);
-    return  bcrypt.hashSync(password, salt);
-}
+//   function cryptPass(password){
+//     const salt = bcrypt.genSaltSync(10);
+//     return  bcrypt.hashSync(password, salt);
+// }
 
-function comparePass(password, hash){
-    return bcrypt.compareSync(password, hash);
-}
+// function comparePass(password, hash){
+//     return bcrypt.compareSync(password, hash);
+// }
 
 const expressServer= app.listen(process.env.PORT || port , (err) => {
   if(!err){
@@ -93,69 +94,69 @@ app.use(
 app.use (passport.initialize());
 app.use (passport.session());
 
-const register = new LocalStrategy(
-  { passReqToCallback: true },
-  async (req, username, password, done) => {
-    try {
-      const existingUser = await usersSchema.findOne({ username });
+// const register = new LocalStrategy(
+//   { passReqToCallback: true },
+//   async (req, username, password, done) => {
+//     try {
+//       const existingUser = await usersSchema.findOne({ username });
 
-      if (existingUser) {
-        return done(null, null);
-      }
-      const userCart= await saveCart()
-      const newUser = {
-        username,
-        password: cryptPass(password),
-        email: req.body.email,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        Age: req.body.Age,
-        phone: req.body.country + req.body.phone,
-        avatar : idAvatar,
-        Direction : req.body.direccion,
-        UserCart : userCart
-      };
+//       if (existingUser) {
+//         return done(null, null);
+//       }
+//       const userCart= await saveCart()
+//       const newUser = {
+//         username,
+//         password: cryptPass(password),
+//         email: req.body.email,
+//         firstName: req.body.firstName,
+//         lastName: req.body.lastName,
+//         Age: req.body.Age,
+//         phone: req.body.country + req.body.phone,
+//         avatar : idAvatar,
+//         Direction : req.body.direccion,
+//         UserCart : userCart
+//       };
 
 
         
            
-sendGmail("Nuevo usuario",`<div>Nombre de usuario : ${newUser.username}</div>
-<div>contraseña (encriptada) : ${newUser.password}</div>
-<div>email : ${newUser.email}</div>
-<div>primer nombre : ${newUser.firstName}</div>
-<div>apellido : ${newUser.lastName}</div>
-<div>edad : ${newUser.Age}</div>
-<div>telefono : ${newUser.phone}</div>
-<div>Avatar : ${newUser.avatar}</div>
-<div>Direccion : ${newUser.Direction}</div>`)
-const createdUser = await usersSchema.create(newUser);
+// sendGmail("Nuevo usuario",`<div>Nombre de usuario : ${newUser.username}</div>
+// <div>contraseña (encriptada) : ${newUser.password}</div>
+// <div>email : ${newUser.email}</div>
+// <div>primer nombre : ${newUser.firstName}</div>
+// <div>apellido : ${newUser.lastName}</div>
+// <div>edad : ${newUser.Age}</div>
+// <div>telefono : ${newUser.phone}</div>
+// <div>Avatar : ${newUser.avatar}</div>
+// <div>Direccion : ${newUser.Direction}</div>`)
+// const createdUser = await usersSchema.create(newUser);
 
 
 
 
 
-      done(null, createdUser);
-    } catch (err) {
-      logger.warn("Error registrando usuario", err);
+//       done(null, createdUser);
+//     } catch (err) {
+//       logger.warn("Error registrando usuario", err);
     
-      done("Error en registro", null);
-    }
-  }
-);
-const login = new LocalStrategy(async (username, password, done) => {
-  try {
-    const user = await usersSchema.findOne({ username });
+//       done("Error en registro", null);
+//     }
+//   }
+// );
+// const login = new LocalStrategy(async (username, password, done) => {
+//   try {
+//     const user = await usersSchema.findOne({ username });
 
-    if (!user || !comparePass(password, user.password)) {
-      return done(null, null);
-    }
+//     if (!user || !comparePass(password, user.password)) {
+//       return done(null, null);
+//     }
 
-    done(null, user);
-  } catch (err) {
-    logger.error("Error login", err);
-    done("Error login", null);
-  }
-});
+//     done(null, user);
+//   } catch (err) {
+//     logger.error("Error login", err);
+//     done("Error login", null);
+//   }
+// });
 passport.use("register", register);
 passport.use("login", login);
 passport.serializeUser((user, done) => {

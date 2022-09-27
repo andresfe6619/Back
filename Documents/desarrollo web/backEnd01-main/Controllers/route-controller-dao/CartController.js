@@ -1,7 +1,6 @@
 import { CartService } from "../../services/cart.service.js";
 import {logger} from "../../logs/loggers.js";
-import {filterId} from "./productController.js"
-import {sendGmail, sendWpp} from "../Gmail-Wpp.js";
+import {sendGmail, sendWpp} from "../../services/Gmail-Wpp.js";
 import { productService } from "../../services/Product.service.js";
 const saveCart = async (req, res) => {
     try {
