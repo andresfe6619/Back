@@ -49,9 +49,9 @@ async getAll () {
         return resultado;
     }
     
-    async saveCartCont () {
-        const nuevoCarrito = { timestamp: "", productos: []};
-        let resultado = await this.saveObject(nuevoCarrito);
+    async saveCartCont (newCart) {
+        
+        let resultado = await this.saveObject(newCart);
         return resultado.id;
    
     }
@@ -70,25 +70,29 @@ async getAll () {
         return resultado
     }
 
-    async eraseFromCart (idCart, idProduct) {
-        let resultado;
-        let tempCart = await this.getById(idCart);
-        if (tempCart){
-            let arrayProducts = tempCart.productos;
-            let index = arrayProducts.findIndex(x => x._id == idProduct);
-              console.log ("indice : ", index)
-            if (index >= 0) {
-                 arrayProducts.splice(index, 1);
-                 await this.collection.findByIdAndUpdate(idCart, {productos: arrayProducts});
-                 resultado = `Producto con ID ${idProduct}, eliminado correctamente del cart con ID ${idCart}`;
-             } else {
-                 resultado = "El carrito es correcto pero el producto no existe";
-             }
-         } else {
-             resultado = "El carrito no existe"
-         }
-     return resultado;
-    }
+    async eraseFromCart (id, array) {
+    //     let resultado;
+    //     let tempCart = await this.getById(idCart);
+    //     if (tempCart){
+    //         let arrayProducts = tempCart.productos;
+    //         let index = arrayProducts.findIndex(x => x._id == idProduct);
+    //           console.log ("indice : ", index)
+    //         if (index >= 0) {
+    //              arrayProducts.splice(index, 1);
+    //              await this.collection.findByIdAndUpdate(idCart, {productos: arrayProducts});
+    //              resultado = `Producto con ID ${idProduct}, eliminado correctamente del cart con ID ${idCart}`;
+    //          } else {
+    //              resultado = "El carrito es correcto pero el producto no existe";
+    //          }
+    //      } else {
+    //          resultado = "El carrito no existe"
+    //      }
+    //  return resultado;
+    await this.collection.findByIdAndUpdate(id, {productos: array});   
+
+}
+
+
 }
 
 export default contenedorMongo;
