@@ -8,15 +8,16 @@ const showAll = async(req, res) => {
        
      
             const prods = await productService.getAll()
+            
             logger.info(prods)
-            res.json(prods)
+            res.render("products", {prods , hasAny :true})
          
             
        
         } catch (error) {
             const prods = await productService.getAll()
             logger.error(error)
-            res.json(prods);
+            res.render("products", { hasAny : false})
           
         
         

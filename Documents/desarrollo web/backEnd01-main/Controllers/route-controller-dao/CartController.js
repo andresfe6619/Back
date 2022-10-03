@@ -27,24 +27,22 @@ const deleteById = async (req, res) => {
         res.sendStatus(500);
     }
 }
-const ArrayPedidos=[]
+
+let pedido 
 
 const getAllFromCarro = async (req, res) => {
     try {
         const id = req.user.UserCart
-        let resultado = await CartService.getById(id);
-        let productos = resultado.productos
-        let prueba = resultado.productos[0].title
-        let precio = resultado.productos[0].price
-        let idP = resultado.productos[0]._id
-        let pedido = {title: prueba, price: precio, id : idP}
-        if (productos.length = 0){
-         res.render("carrito")
-
+        const prods = await CartService.getById(id);
+        
+        if (prods.length =! 0){
+        pedido = prods
+        const products = JSON.stringify(prods)
+        res.render("carro",{prods: prods, pedido: products, Carro: id, hasAny: true  } );
         }else{
         //let productos = JSON.stringify(resultado.productos)       
-        ArrayPedidos.push(prueba)
-        res.render("carro",{Carro : resultado.id, Productos : prueba, Carrito: true  } );
+        //ArrayPedidos.push(prueba)
+         res.render("carrito", {hasAny: false })
         // const  Pedido = document.querySelector("#Pedido") 
         // function submitHandler (e) {
         //     e.preventDefault()
@@ -70,7 +68,9 @@ res.redirect("/api/users/home")
 
 
 try {
-  const body = `Hola, tienes un nuevo pedido del carrito con id : ${req.user.UserCart} y el pedido es: ${ArrayPedidos}`
+  
+  const pedidos = JSON.stringify(pedido)
+    const body = `Hola, tienes un nuevo pedido del carrito con id : ${req.user.UserCart} y el pedido es: ${pedidos}`
 if (req.user.phone === process.env.TO){
 
 const wpp = await sendWpp(body, req.user.phone)  
@@ -85,7 +85,7 @@ sendGmail("Nuevo pedido",`<div>Nombre de usuario : ${req.user.username}</div>
 <div>telefono : ${req.user.phone}</div>
 <div> Id del carro : ${req.user.UserCart}</div>
 <div>Direccion : ${req.user.Direction}</div>
-<div> Pedido(s):${ArrayPedidos} </div>
+<div> Pedido(s):${pedidos} </div>
 `  )
 }catch(error){
     logger.error(error)

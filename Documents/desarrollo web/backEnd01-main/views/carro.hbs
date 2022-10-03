@@ -1,10 +1,43 @@
 <h1>TU CARRITO</h1>
 <h2>{{Carro}}</h2>
+{{#if hasAny}}
+<label for="exampleInputEmail1" class="form-label" > Tu producto</label>
+<table class="table table-dark table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titulo</th>
+       <th scope="col">StocK</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Imagen</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  
+   {{#each prods}}
+    <tr>
+      <th scope="row">{{_id}}</th>
+      <td>{{title}}</td>
+      <td>{{stock}}</td>
+      <td>{{price}}</td>
+      <td>
+      <img src={{thumbnail}} width="100" height="100"></img></td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table> 
 <form action="/api/carro/terminar" enctype="multipart/form-data" method="POST">
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label" > Tu producto</label>
-    <input type="text" class="form-control" value="{{Productos}}" id="pedidos" aria-describedby="emailHelp" name="pedidos">
+    
+    <input type="text" class="form-control" value="{{pedido}}" id="pedidos" aria-describedby="emailHelp" name="pedidos">
    
   
   <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">Submit</button>
 </form> 
+{{else}}
+      
+   <h2>Aun no tienes productos en tu carrito </h2>
+<a href="/api/productos/Listado" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > ir de compras </a> 
+
+      {{/if}}

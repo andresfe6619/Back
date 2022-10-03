@@ -2,15 +2,25 @@ import {CarroDao} from "../Models/Daos/indexDao.js"
 
 const getAll = async () => {
     const data = await CarroDao.getAll();
-
+ 
     return data;
 }
 const getById = async (cart) => {
-    const result = CarroDao.getById(cart);
-
+    const data = await CarroDao.getById(cart);
+    const result = await data.productos.map(product =>  {       
+        return{ 
+           title : product.title,
+           price : product.price, 
+           thumbnail:product.thumbnail,
+           descrip : product.descrip,
+           stock :product.stock,
+           codigo : product.codigo,
+           
+   
+        }                    
+       }
+       )
     return result
-
-
 }
 const saveCart = async (date) => {
     const nuevoCarrito = { timestamp: date, productos: []};

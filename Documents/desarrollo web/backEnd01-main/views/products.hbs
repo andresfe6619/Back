@@ -4,8 +4,10 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Titulo</th>
+       <th scope="col">StocK</th>
       <th scope="col">Precio</th>
       <th scope="col">Imagen</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -14,14 +16,17 @@
     <tr>
       <th scope="row">{{id}}</th>
       <td>{{title}}</td>
+      <td>{{stock}}</td>
       <td>{{price}}</td>
       <td>
       <img src={{thumbnail}} width="100" height="100"></img></td>
+    <td> <a action="submit" href="api/carro/agregar" class="btn btn-dark " tabindex="-1" role="button" aria-disabled="true"> comprar </a> </td>
     </tr>
-    {{/each}}
+  {{/each}}
   </tbody>
 </table> 
-<a href="/api/home" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >volver al formulario </a> 
+<a href="/api/users/home" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >volver atras </a> 
+<a action="/api/carro/Listado" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > ver mi carrito</a>
 {{else}}
     
     <div class="d-flex align-items-center">

@@ -1,8 +1,25 @@
 import {productDao} from "../Models/Daos/indexDao.js"
 const getAll = async () => {
     const data = await productDao.getAll();
+    
+    const result = await data.map(product =>  {
+        
+     return{ 
+        id : product.id ,
+        title : product.title,
+        price : product.price, 
+        thumbnai:product.thumbnail,
+        descrip : product.descrip,
+        stock :product.stock,
+        codigo : product.codigo,
+        
 
-    return data;
+     }                    
+    }
+    )
+
+//debes copiar el id del producto
+return result 
 }
 
 const getById = async (cart) => {
