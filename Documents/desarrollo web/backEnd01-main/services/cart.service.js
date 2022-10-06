@@ -1,5 +1,8 @@
 import {CarroDao} from "../Models/Daos/indexDaoFactory.js"
+import Cotizador from "../DTO/cotizador.js"
+import productDTO from "../DTO/productDTO.js"
 
+const cotizador = new Cotizador();
 const getAll = async () => {
     const data = await CarroDao.getAll();
  
@@ -8,18 +11,19 @@ const getAll = async () => {
 const getById = async (cart) => {
     const data = await CarroDao.getById(cart);
     const result = await data.productos.map(product =>  {       
-        return{ 
-           title : product.title,
-           price : product.price, 
-           thumbnail:product.thumbnail,
-           descrip : product.descrip,
-           stock :product.stock,
-           codigo : product.codigo,
-           
-   
-        }                    
-       }
-       )
+        const currencies ={
+            arsPrice: cotizador.getCurrencyPrice(product.price, "ARS"),
+            colPrice: cotizador.getCurrencyPrice(product.price, "COL"),
+            mexPrice: cotizador.getCurrencyPrice(product.price, "MEX")
+        }
+        const prods =  {  id : product.id ,
+            title : product.title,
+            price : product.price, 
+            thumbnai:product.thumbnail,
+            stock :product.stock,}  
+         return new productDTO( prods, currencies )
+         }                    
+        )
     return result
 }
 const saveCart = async (date) => {

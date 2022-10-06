@@ -61,7 +61,7 @@ async getAll () {
         let resultado;
         let tempCart = await this.getById(idCart);
         if ( tempCart ){
-         //elemento._id  = tempCart.productos.length + 1;   
+         
             tempCart.productos.push( elemento);
             await this.updateById(idCart, tempCart);
             resultado = `Producto : ${elemento.title},  ha sido añadido correctamente al cart con ID ${idCart}`;
@@ -72,23 +72,7 @@ async getAll () {
     }
 
     async eraseFromCart (id, array) {
-    //     let resultado;
-    //     let tempCart = await this.getById(idCart);
-    //     if (tempCart){
-    //         let arrayProducts = tempCart.productos;
-    //         let index = arrayProducts.findIndex(x => x._id == idProduct);
-    //           console.log ("indice : ", index)
-    //         if (index >= 0) {
-    //              arrayProducts.splice(index, 1);
-    //              await this.collection.findByIdAndUpdate(idCart, {productos: arrayProducts});
-    //              resultado = `Producto con ID ${idProduct}, eliminado correctamente del cart con ID ${idCart}`;
-    //          } else {
-    //              resultado = "El carrito es correcto pero el producto no existe";
-    //          }
-    //      } else {
-    //          resultado = "El carrito no existe"
-    //      }
-    //  return resultado;
+    
     await this.collection.findByIdAndUpdate(id, {productos: array});   
 
 }

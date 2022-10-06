@@ -1,21 +1,25 @@
 import {productDao} from "../Models/Daos/indexDaoFactory.js"
+import Cotizador from "../DTO/cotizador.js"
+import productDTO from "../DTO/productDTO.js"
+
+const cotizador = new Cotizador();
+
 const getAll = async () => {
     const data = await productDao.getAll();
     
     const result = await data.map(product =>  {
-        
-     return{ 
-        id : product.id ,
+    const currencies ={
+        arsPrice: cotizador.getCurrencyPrice(product.price, "ARS"),
+        colPrice: cotizador.getCurrencyPrice(product.price, "COL"),
+        mexPrice: cotizador.getCurrencyPrice(product.price, "MEX")
+    }
+    const prods =  {  id : product.id ,
         title : product.title,
         price : product.price, 
         thumbnai:product.thumbnail,
-        descrip : product.descrip,
-        stock :product.stock,
-        codigo : product.codigo,
-        
-
+        stock :product.stock,}  
+     return new productDTO( prods, currencies )
      }                    
-    }
     )
 
 //debes copiar el id del producto
