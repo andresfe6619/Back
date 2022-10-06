@@ -1,7 +1,7 @@
 import multer from "multer"
 import {Strategy as LocalStrategy} from 'passport-local';
 import {sendGmail} from "../services/Gmail-Wpp.js"
-import {findName, createUser, comparePass, cryptPass} from "../Models/Daos/users.Dao.js"
+import {findNameDao, createUserDao, comparePassDao, cryptPassDao } from "../Models/Daos/indexDaoFactory.js"
 import {logger} from "../logs/loggers.js"
 import {CartService} from "./cart.service.js"
 var date = new Date();
@@ -33,7 +33,7 @@ const register = new LocalStrategy(
     { passReqToCallback: true },
     async (req, username, password, done) => {
       try {
-        const existingUser = await findName(username);
+        const existingUser = await findNameDao(username);
   
         if (existingUser) {
           return done(null, null);
@@ -41,7 +41,7 @@ const register = new LocalStrategy(
         const userCart= await CartService.saveCart(date)
         const newUser = {
           username,
-          password: cryptPass(password),
+          password: cryptPassDao(password),
           email: req.body.email,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
@@ -55,7 +55,7 @@ const register = new LocalStrategy(
   
           
              
-  sendGmail("Nuevo usuario",`<div>Nombre de usuario : ${newUser.username}</div>
+  sendGmail("Nuevo usuario",` <div>Nombre de usuario : ${newUser.username}</div>
   <div>contraseña (encriptada) : ${newUser.password}</div>
   <div>email : ${newUser.email}</div>
   <div>primer nombre : ${newUser.firstName}</div>
@@ -64,7 +64,7 @@ const register = new LocalStrategy(
   <div>telefono : ${newUser.phone}</div>
   <div>Avatar : ${newUser.avatar}</div>
   <div>Direccion : ${newUser.Direction}</div>`)
-  const createdUser = await createUser(newUser);
+  const createdUser = await createUserDao(newUser);
   
   
   
@@ -82,9 +82,9 @@ const register = new LocalStrategy(
 
   const login = new LocalStrategy(async (username, password, done) => {
     try {
-      const user = await findName(username);
+      const user = await findNameDao(username);
   
-      if (!user || !comparePass(password, user.password)) {
+      if (!user || !comparePassDao(password, user.password)) {
         return done(null, null);
       }
   

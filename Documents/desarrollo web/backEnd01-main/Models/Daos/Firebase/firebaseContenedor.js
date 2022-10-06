@@ -1,5 +1,5 @@
 import admin from 'firebase-admin';
-import configs from "../../Connections/configs.js";
+import configs from "../../../Connections/configs.js";
 
 
 admin.initializeApp({

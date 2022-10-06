@@ -1,4 +1,4 @@
-import {CarroDao} from "../Models/Daos/indexDao.js"
+import {CarroDao} from "../Models/Daos/indexDaoFactory.js"
 
 const getAll = async () => {
     const data = await CarroDao.getAll();
