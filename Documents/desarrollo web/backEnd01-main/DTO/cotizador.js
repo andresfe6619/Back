@@ -1,3 +1,4 @@
+let instance
 class Cotizador {
     static currencies = {
       USD: 1,
@@ -20,6 +21,16 @@ class Cotizador {
           break;
       }
     }
-  }
+  
+    static getInstance(){
+        if (!instance) {
+            instance= new Cotizador();
+        
+        }
+        return instance ;
+  
+
+
+}}
   
   export default Cotizador;

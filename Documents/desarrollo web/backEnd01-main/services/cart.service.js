@@ -2,7 +2,7 @@ import {CarroDao} from "../Models/Daos/indexDaoFactory.js"
 import Cotizador from "../DTO/cotizador.js"
 import productDTO from "../DTO/productDTO.js"
 
-const cotizador = new Cotizador();
+const cotizador =  new Cotizador();
 const getAll = async () => {
     const data = await CarroDao.getAll();
  
@@ -10,6 +10,8 @@ const getAll = async () => {
 }
 const getById = async (cart) => {
     const data = await CarroDao.getById(cart);
+
+    
     const result = await data.productos.map(product =>  {       
         const currencies ={
             arsPrice: cotizador.getCurrencyPrice(product.price, "ARS"),

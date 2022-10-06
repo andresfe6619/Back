@@ -1,3 +1,4 @@
+let instance
 class ProductDTO {
     constructor(data, currencies) {
       this.title = data.title;
@@ -8,6 +9,19 @@ class ProductDTO {
         this[currency] = value;
       }
     }
-  }
+
+    static getInstance(){
+        if (!instance) {
+            instance= new ProductDTO();
+        
+        }
+        return instance ;
+  
+    
+}
+
+
+
+}
   
   export default ProductDTO;
