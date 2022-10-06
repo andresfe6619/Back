@@ -1,3 +1,5 @@
+
+// FUERA DE SERVICIO
 import bcrypt from 'bcrypt';
 import {usersSchema} from "./usersModel.js"
 function cryptPass(password){

@@ -2,17 +2,13 @@
 // el users
 import dotenv from "dotenv";
 dotenv.config({path: ".env"});
-import {findName, createUser, comparePass, cryptPass} from "../Daos/mongo/users.Dao.js"
+
 import { usersSchema } from "./mongo/usersModel.js";
 import {logger} from "../../logs/loggers.js"
-// Como no uso user con mongo unicamente los re defino con el prefijo Dao
-let findNameDao = findName
-let createUserDao = createUser
-let comparePassDao = comparePass
-let cryptPassDao = cryptPass
 
 
-let userDao = new usersSchema
+
+let userDao =  usersSchema.getInstance()
 let productDao
 let CarroDao
 //switch (process.env.DATABASE)
@@ -22,17 +18,17 @@ switch (process.argv[2])
         const { default: ProductDaoMongo } = await import("./mongo/productos.dao.js");
         const { default: CartMongo } = await import("./mongo/carritos.dao.js");
       
-        productDao = new ProductDaoMongo;
-        CarroDao =  new CartMongo;
+        productDao =  ProductDaoMongo.getInstance();
+        CarroDao =   CartMongo.getInstance();
        logger.info("Mongo is working")
         break;
     case "firebase":
         const { default: ProductDaoFirebase } = await import("./Firebase/productos.dao.js");
         const { default: CartDaoFirebase } = await import("./Firebase/carritos.dao.js");
-        productDao = new ProductDaoFirebase;
-        CarroDao = new CartDaoFirebase;
+        productDao =  ProductDaoFirebase.getInstance();
+        CarroDao =  CartDaoFirebase.getInstance();
         logger.info("firebase is working")
         break;
 };
 
-export { productDao, CarroDao, userDao, findNameDao, createUserDao, comparePassDao, cryptPassDao };
+export { productDao, CarroDao, userDao};

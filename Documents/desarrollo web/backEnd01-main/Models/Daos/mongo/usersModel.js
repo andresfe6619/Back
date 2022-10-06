@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 import ContenedorMongo from "./mongoContenedor.js";
- class usersSchema extends  ContenedorMongo{ 
+ 
+let instance 
+class usersSchema extends  ContenedorMongo{ 
     constructor () {
     super ('users', {
     username : {type: String, required: true},
@@ -40,12 +42,15 @@ return existingUser
     const createdUser = await this.collection.create(newUser);
  return createdUser
 };
-// deserialize = async (id, done) => {
-//     const something= await this.collection.findById(id, done);
-//   return something
-// };
+static getInstance(){
+    if (!instance) {
+        instance= new usersSchema();
+    
+    }
+    return instance ;
 
 
-};
+}
+}
 
 export  {usersSchema}

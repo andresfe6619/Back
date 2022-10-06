@@ -1,5 +1,5 @@
 import ContenedorMongo from "./mongoContenedor.js";
-
+let instance
 class contenedorProds extends ContenedorMongo{
    constructor () {
          super("Productos", {
@@ -11,6 +11,15 @@ class contenedorProds extends ContenedorMongo{
             codigo: { type: String, required: true },
          })
    }
+   static getInstance(){
+      if (!instance) {
+          instance= new contenedorProds();
+      
+      }
+      return instance ;
+   }
+
+
 }
 
 export default contenedorProds;
