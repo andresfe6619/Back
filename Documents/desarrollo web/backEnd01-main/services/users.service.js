@@ -1,7 +1,7 @@
 import multer from "multer"
 import {Strategy as LocalStrategy} from 'passport-local';
 import {sendGmail} from "../services/Gmail-Wpp.js"
-import {findNameDao, createUserDao, comparePassDao, cryptPassDao } from "../Models/Daos/indexDaoFactory.js"
+import {findNameDao, createUserDao, comparePassDao, cryptPassDao, userDao } from "../Models/Daos/indexDaoFactory.js"
 import {logger} from "../logs/loggers.js"
 import {CartService} from "./cart.service.js"
 var date = new Date();
@@ -33,7 +33,7 @@ const register = new LocalStrategy(
     { passReqToCallback: true },
     async (req, username, password, done) => {
       try {
-        const existingUser = await findNameDao(username);
+        const existingUser = await userDao.findName(username);
   
         if (existingUser) {
           return done(null, null);
@@ -41,7 +41,7 @@ const register = new LocalStrategy(
         const userCart= await CartService.saveCart(date)
         const newUser = {
           username,
-          password: cryptPassDao(password),
+          password: userDao.cryptPass(password),
           email: req.body.email,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
@@ -64,7 +64,7 @@ const register = new LocalStrategy(
   <div>telefono : ${newUser.phone}</div>
   <div>Avatar : ${newUser.avatar}</div>
   <div>Direccion : ${newUser.Direction}</div>`)
-  const createdUser = await createUserDao(newUser);
+  const createdUser = await userDao.createUser(newUser);
   
   
   
@@ -82,9 +82,9 @@ const register = new LocalStrategy(
 
   const login = new LocalStrategy(async (username, password, done) => {
     try {
-      const user = await findNameDao(username);
+      const user = await userDao.findName(username);
   
-      if (!user || !comparePassDao(password, user.password)) {
+      if (!user || !userDao.comparePass(password, user.password)) {
         return done(null, null);
       }
   

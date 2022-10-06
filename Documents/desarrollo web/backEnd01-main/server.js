@@ -7,10 +7,9 @@ import session from "express-session";
 import os from "os"
 import cluster from "cluster"
 import MongoStore from "connect-mongo";
-import bcrypt from 'bcrypt';
 import passport from 'passport';
-import {Strategy as LocalStrategy} from 'passport-local';
-import {usersSchema} from "./Models/usersModel.js";
+import {usersSchema} from "./Models/Daos/mongo/usersModel.js";
+import {userDao} from "./Models/Daos/indexDaoFactory.js";
 const app = express();
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -92,70 +91,6 @@ app.use(
 );
 app.use (passport.initialize());
 app.use (passport.session());
-
-// const register = new LocalStrategy(
-//   { passReqToCallback: true },
-//   async (req, username, password, done) => {
-//     try {
-//       const existingUser = await usersSchema.findOne({ username });
-
-//       if (existingUser) {
-//         return done(null, null);
-//       }
-//       const userCart= await saveCart()
-//       const newUser = {
-//         username,
-//         password: cryptPass(password),
-//         email: req.body.email,
-//         firstName: req.body.firstName,
-//         lastName: req.body.lastName,
-//         Age: req.body.Age,
-//         phone: req.body.country + req.body.phone,
-//         avatar : idAvatar,
-//         Direction : req.body.direccion,
-//         UserCart : userCart
-//       };
-
-
-        
-           
-// sendGmail("Nuevo usuario",`<div>Nombre de usuario : ${newUser.username}</div>
-// <div>contraseña (encriptada) : ${newUser.password}</div>
-// <div>email : ${newUser.email}</div>
-// <div>primer nombre : ${newUser.firstName}</div>
-// <div>apellido : ${newUser.lastName}</div>
-// <div>edad : ${newUser.Age}</div>
-// <div>telefono : ${newUser.phone}</div>
-// <div>Avatar : ${newUser.avatar}</div>
-// <div>Direccion : ${newUser.Direction}</div>`)
-// const createdUser = await usersSchema.create(newUser);
-
-
-
-
-
-//       done(null, createdUser);
-//     } catch (err) {
-//       logger.warn("Error registrando usuario", err);
-    
-//       done("Error en registro", null);
-//     }
-//   }
-// );
-// const login = new LocalStrategy(async (username, password, done) => {
-//   try {
-//     const user = await usersSchema.findOne({ username });
-
-//     if (!user || !comparePass(password, user.password)) {
-//       return done(null, null);
-//     }
-
-//     done(null, user);
-//   } catch (err) {
-//     logger.error("Error login", err);
-//     done("Error login", null);
-//   }
-// });
 passport.use("register", register);
 passport.use("login", login);
 passport.serializeUser((user, done) => {
@@ -163,7 +98,8 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  usersSchema.findById(id, done);
+  userDao.findName(id, done)
+  //userDao.findById(id, done);
 });
 
 

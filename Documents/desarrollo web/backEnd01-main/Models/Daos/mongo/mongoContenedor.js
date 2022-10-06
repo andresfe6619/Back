@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import configs from "../../../Connections/configs.js";
 
 await mongoose.connect(configs.mongodb.connectionString);
-
+let instance
 class contenedorMongo {
  constructor (coleccion, esquema) {
     this.collection = mongoose.model(coleccion, esquema);
@@ -76,6 +76,13 @@ async getAll () {
     await this.collection.findByIdAndUpdate(id, {productos: array});   
 
 }
+static getInstance(){
+if (!instance) {
+    instance= new contenedorMongo();
+
+}
+return instance ;
+} 
 
 
 }

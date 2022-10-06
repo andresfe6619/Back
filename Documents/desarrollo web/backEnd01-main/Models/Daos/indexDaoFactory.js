@@ -3,6 +3,7 @@
 import dotenv from "dotenv";
 dotenv.config({path: ".env"});
 import {findName, createUser, comparePass, cryptPass} from "../Daos/mongo/users.Dao.js"
+import { usersSchema } from "./mongo/usersModel.js";
 import {logger} from "../../logs/loggers.js"
 // Como no uso user con mongo unicamente los re defino con el prefijo Dao
 let findNameDao = findName
@@ -11,7 +12,7 @@ let comparePassDao = comparePass
 let cryptPassDao = cryptPass
 
 
-
+let userDao = new usersSchema
 let productDao
 let CarroDao
 //switch (process.env.DATABASE)
@@ -34,4 +35,4 @@ switch (process.argv[2])
         break;
 };
 
-export { productDao, CarroDao, findNameDao, createUserDao, comparePassDao, cryptPassDao };
+export { productDao, CarroDao, userDao, findNameDao, createUserDao, comparePassDao, cryptPassDao };
