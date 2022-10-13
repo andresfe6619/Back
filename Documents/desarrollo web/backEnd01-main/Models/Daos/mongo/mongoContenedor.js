@@ -10,18 +10,20 @@ class contenedorMongo {
 } 
 async getAll () {
     const docs = await this.collection.find();
-   
+    console.log(docs)
     return docs;
     }
 
     async getById (id) {
         const doc = await this.collection.findById(id, { __v: 0 });
+        console.log(doc)
         return doc;
     }
 
     async saveObject (elemento) {
         const nuevoElemento = new this.collection(elemento);
         let nuevoElementoGuardado = await nuevoElemento.save();
+        console.log(nuevoElementoGuardado)
         return(nuevoElementoGuardado);
     }
 
@@ -34,6 +36,7 @@ async getAll () {
                 resultado = doc;
             }
         }).clone();
+        console.log(resultado)
         return resultado
     }
 
@@ -46,6 +49,7 @@ async getAll () {
                 resultado = doc;
             }
         }).clone();
+        console.log(resultado)
         return resultado;
     }
     

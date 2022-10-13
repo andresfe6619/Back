@@ -1,6 +1,6 @@
 import {expect } from "chai"
 import supertest from "supertest"
-
+let largo
 let id 
 let request
 let createdProd
@@ -14,8 +14,16 @@ request = supertest("http://localhost:8080")
 describe("-GET /productos/Listado", () => {
 it("should return 200", async ()=>{
     const response= await request.get("/api/productos/Listado") 
-expect (response.status).to.eql(200)
+    largo = response.body
+    expect (response.status).to.eql(200)
 })
+it("it should be there 28 products", async () => {
+
+
+ expect(largo.length).to.eql(28)   
+})
+
+
 })
 describe("-POST /productos/agregar", () => {
 const proof = {
@@ -51,8 +59,8 @@ id = createdProd._id
 })
 describe(`-PUT /api/productos/Listado/${id}`, () =>{
     const proof = {
-        title: "varita magica",
-        price: 1000,
+        title: "varita de voldemort",
+        price: 2000,
         thumbnail: "https://",
         descrip: "con ella podras ser un poderoso hechicero",          
         stock: 1,                  
@@ -87,6 +95,11 @@ expect(response.status).to.eql(200)
 it("it should return the deleted info", async ()=>{
    expect(id).to.eql(updatedProd._id) 
     
+})
+it("the product deleted shouldnt exist", async ()=> {
+    const response = await request.get(`/api/productos/Listado/${id}`)
+    const di = response.body
+    expect(di).to.eql(null)
 }) 
 })
 

@@ -5,20 +5,22 @@
 
   test API
     -GET /productos/Listado
-      ✔ should return 200 (304ms)
+      ✔ should return 200 (280ms)
+      ✔ it should be there 28 products
     -POST /productos/agregar
-      ✔ should return 200 (281ms)
+      ✔ should return 200 (232ms)
       ✔ it should be ok with the product model
       ✔ it should return created Prod
       -PUT /api/productos/Listado/undefined
-        ✔ Should return 200 (211ms)
+        ✔ Should return 200 (191ms)
         ✔ it should return the product updated
       -DELETE /api/productos/Listado/undefined
-        ✔ it should return 200 (197ms)
+        ✔ it should return 200 (186ms)
         ✔ it should return the deleted info
+        ✔ the product deleted shouldnt exist (180ms)
       -GET /api/productos/Listado/:id
-        ✔ it should return 200 (223ms)
+        ✔ it should return 200 (177ms)
         ✔ it should return the asked product
 
 
-  10 passing (1s)
+  12 passing (1s)

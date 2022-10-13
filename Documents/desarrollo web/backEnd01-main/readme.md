@@ -85,7 +85,7 @@ borrando producto metodo DELETE
 }
 
 
-Http Se realizaron las mismas operaciones que con Axios pero con la librería nativa http, el resultado fue:
+Http Se realizaron las mismas operaciones que con Axios pero con la librería nativa http(el reporte entero esta en su txxt dado que las respuestas de la base de datos fueron extensas ya que tenia muchos productos), el resultado fue:
 \test\http>node http.js
 Trayendo productos metodo GET
 status code:200
@@ -168,7 +168,6 @@ Mocha Con lo combinación Mocha/Supertest/Chai se realizo la misma operacion y s
   8 passing (1s)
 Suite completa En este caso se repitió la combinación anterior se agregó el test de obtener un producto por su id, ya que en la consigna se dice que es una suite completa a las respuestas de dichos metodos Con el siguiente resultado:
 \>npm test
-
 > andres-felipe@1.0.0 test
 > mocha ./test/suite/suite.js
 
@@ -176,21 +175,22 @@ Suite completa En este caso se repitió la combinación anterior se agregó el t
 
   test API
     -GET /productos/Listado
-      ✔ should return 200 (304ms)
+      ✔ should return 200 (280ms)
+      ✔ it should be there 28 products
     -POST /productos/agregar
-      ✔ should return 200 (281ms)
+      ✔ should return 200 (232ms)
       ✔ it should be ok with the product model
       ✔ it should return created Prod
       -PUT /api/productos/Listado/undefined
-        ✔ Should return 200 (211ms)
+        ✔ Should return 200 (191ms)
         ✔ it should return the product updated
       -DELETE /api/productos/Listado/undefined
-        ✔ it should return 200 (197ms)
+        ✔ it should return 200 (186ms)
         ✔ it should return the deleted info
+        ✔ the product deleted shouldnt exist (180ms)
       -GET /api/productos/Listado/:id
-        ✔ it should return 200 (223ms)
+        ✔ it should return 200 (177ms)
         ✔ it should return the asked product
 
 
-  10 passing (1s)
-
+  12 passing (1s)

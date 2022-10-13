@@ -1,3 +1,5 @@
+
+Cliente
 Trayendo productos metodo GET
 status code:200
 [
@@ -50,3 +52,211 @@ status code: 200
 borrando producto metodo DELETE
 status code:200
 { _id: '63470a220895ce0e943a9c00', __v: 0 }
+
+Base de datos
+Trayendo todos GET
+[
+  {
+    _id: new ObjectId("6346f0f62b416c3d34bc79e5"),
+    title: 'machete',
+    price: 30,
+    thumbnail: 'https://',
+    descrip: 'esto es un machete muy afilado',
+    stock: 10,
+    codigo: '886',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("6346f1aa6157e1fb4539554b"),
+    title: 'machete',
+    price: 30,
+    thumbnail: 'https://',
+    descrip: 'esto es un machete muy afilado',
+    stock: 10,
+    codigo: '886',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("6346f1e0b6e1fa3f3dc57e6d"),
+    title: 'machete',
+    price: 30,
+    thumbnail: 'https://',
+    descrip: 'esto es un machete muy afilado',
+    stock: 10,
+    codigo: '886',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("6346f1f4372c8e40556e8ca7"),
+    title: 'espada',
+    price: 50,
+    thumbnail: 'https://',
+    descrip: 'esta es una espada',
+    stock: 10,
+    codigo: '886',
+    __v: 0
+  },
+  { _id: new ObjectId("634701dade5ac79fbc0b015a"), __v: 0 },
+  { _id: new ObjectId("63470627c929f17ef61f2e4b"), __v: 0 },
+  { _id: new ObjectId("634706d143080d1b108febcd"), __v: 0 },
+  { _id: new ObjectId("63470861fb68e6a28ba61471"), __v: 0 },
+  { _id: new ObjectId("634709172f0e38507ed477d0"), __v: 0 },
+  { _id: new ObjectId("6347094a38dcc255bef466ba"), __v: 0 },
+  { _id: new ObjectId("634709f438dcc255bef466bd"), __v: 0 },
+  { _id: new ObjectId("63470c1d87a1d4413d4756d7"), __v: 0 },
+  { _id: new ObjectId("63470e0c5f75a74ec8a5f6b8"), __v: 0 },
+  { _id: new ObjectId("63470f53e3bee3ae78d377eb"), __v: 0 },
+  { _id: new ObjectId("63470fa5c334a5eb3e065d0d"), __v: 0 },
+  { _id: new ObjectId("634710ebdc22b20a12676e72"), __v: 0 },
+  {
+    _id: new ObjectId("63471dbf288c73923ce99667"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("634769c8bc60ed52b3b64256"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("63476a7fa59e86e56593c81b"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("63476b229076129ddaad5cf5"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("63476bb821a36666853bda15"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("63476bdb0ee827f52b6351f5"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("63476c2460145a74df3355db"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("63476f7321a6517c82c51964"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("63476fc119773b179cce2514"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("63476fe783444c8699248019"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("6347700135df4c07c07d1bcd"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("6347706175b676a012c54db6"),
+    title: 'varita magica',
+    price: 1000,
+    thumbnail: 'https://',
+    descrip: 'con ella podras ser un poderoso hechicero',
+    stock: 1,
+    codigo: '900',
+    __v: 0
+  }
+]
+New Product POST
+{
+  title: 'varita magica',
+  price: 1000,
+  thumbnail: 'https://',
+  descrip: 'con ella podras ser un poderoso hechicero',
+  stock: 1,
+  codigo: '900',
+  _id: new ObjectId("63478ced4698d4d5a0c014f9"),
+  __v: 0
+}
+Producto actualizado PUT
+{
+  _id: new ObjectId("63478ced4698d4d5a0c014f9"),
+  title: 'varita de voldemort',
+  price: 2000,
+  thumbnail: 'https://',
+  descrip: 'con ella podras ser un poderoso hechicero',
+  stock: 1,
+  codigo: '900',
+  __v: 0
+}
+Producto borrado DELETE
+  _id: new ObjectId("63478ced4698d4d5a0c014f9"),
+  title: 'varita de voldemort',
+  price: 2000,
+  thumbnail: 'https://',
+  descrip: 'con ella podras ser un poderoso hechicero',
+  stock: 1,
+  codigo: '900',
+  __v: 0
