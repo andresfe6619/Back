@@ -1,0 +1,70 @@
+trayendo productos metodo GET 
+200 [
+  {
+    title: 'machete',
+    stock: 10,
+    price: 30,
+    id: '6346f0f62b416c3d34bc79e5',
+    arsPrice: 8700,
+    colPrice: 135360,
+    mexPrice: 600
+  },
+  {
+    title: 'machete',
+    stock: 10,
+    price: 30,
+    id: '6346f1aa6157e1fb4539554b',
+    arsPrice: 8700,
+    colPrice: 135360,
+    mexPrice: 600
+  },
+  {
+    title: 'machete',
+    stock: 10,
+    price: 30,
+    id: '6346f1e0b6e1fa3f3dc57e6d',
+    arsPrice: 8700,
+    colPrice: 135360,
+    mexPrice: 600
+  },
+  {
+    title: 'espada',
+    stock: 10,
+    price: 50,
+    id: '6346f1f4372c8e40556e8ca7',
+    arsPrice: 14500,
+    colPrice: 225600,
+    mexPrice: 1000
+  }
+]
+nuevo producto metodo POST
+200 {
+  title: 'machete',
+  price: 30,
+  thumbnail: 'https://',
+  descrip: 'esto es un machete muy afilado',
+  stock: 10,
+  codigo: '886',
+  _id: '6346f34bb62919314c77a7ef',
+  __v: 0
+}
+actualizando un producto metodo PUT
+200 {
+  title: 'espada',
+  price: 50,
+  thumbnail: 'https://',
+  descrip: 'esta es una espada',
+  stock: 10,
+  codigo: '886'
+}
+borrando producto metodo DELETE
+200 {
+  _id: '6346f34bb62919314c77a7ef',
+  title: 'espada',
+  price: 50,
+  thumbnail: 'https://',
+  descrip: 'esta es una espada',
+  stock: 10,
+  codigo: '886',
+  __v: 0
+}

@@ -1,0 +1,24 @@
+> andres-felipe@1.0.0 test
+> mocha ./test/suite/suite.js
+
+
+
+  test API
+    -GET /productos/Listado
+      ✔ should return 200 (304ms)
+    -POST /productos/agregar
+      ✔ should return 200 (281ms)
+      ✔ it should be ok with the product model
+      ✔ it should return created Prod
+      -PUT /api/productos/Listado/undefined
+        ✔ Should return 200 (211ms)
+        ✔ it should return the product updated
+      -DELETE /api/productos/Listado/undefined
+        ✔ it should return 200 (197ms)
+        ✔ it should return the deleted info
+      -GET /api/productos/Listado/:id
+        ✔ it should return 200 (223ms)
+        ✔ it should return the asked product
+
+
+  10 passing (1s)

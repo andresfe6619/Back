@@ -6,7 +6,7 @@ const saveCart = async (req, res) => {
     try {
         const resultado = await CartService.saveCart();
         logger.info("id del carrito"+ resultado)
-        return resultado
+        res.send(resultado)
     } catch (error) {
         logger.error('Ocurrio el siguiente error al querer crear un nuevo CartService', error);
         res.sendStatus(500);
@@ -38,11 +38,13 @@ const getAllFromCarro = async (req, res) => {
         if (prods.length =! 0){
         pedido = prods
         const products = JSON.stringify(prods)
-        res.render("carro",{prods: prods, pedido: products, Carro: id, hasAny: true  } );
+        res.send(products)
+        //res.render("carro",{prods: prods, pedido: products, Carro: id, hasAny: true  } );
         }else{
         //let productos = JSON.stringify(resultado.productos)       
         //ArrayPedidos.push(prueba)
-         res.render("carrito", {hasAny: false })
+        res.send("no hay productos")
+        //res.render("carrito", {hasAny: false })
         // const  Pedido = document.querySelector("#Pedido") 
         // function submitHandler (e) {
         //     e.preventDefault()
@@ -96,7 +98,8 @@ sendGmail("Nuevo pedido",`<div>Nombre de usuario : ${req.user.username}</div>
 
 const terminarCompra = async (req, res) =>{
 
-res.render("terminar")
+res.send("terminando compra")
+    //res.render("terminar")
 
 }
 
@@ -106,7 +109,7 @@ const addProductById = async (req, res) => {
     try {
         
         const id = req.user.UserCart
-        const product = await productService.getById(req.body.IdProd);
+        const product = await productService.getById(req.body);
         
         let resultado = await CartService.saveInCart(id, product);
         logger.info(resultado)
@@ -117,7 +120,8 @@ const addProductById = async (req, res) => {
     }
 }
 const adding = async (req, res) => {
-    res.render("insertId")
+    res.send("enviando")
+    //res.render("insertId")
 }
 
 

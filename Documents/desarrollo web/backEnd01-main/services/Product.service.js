@@ -35,13 +35,13 @@ const getById = async (cart) => {
 }
 const saveObject = async (productToSave) => {
     productToSave.timestamp = new Date().toLocaleString("fr-FR");
-     
-    return productToSave
+     const resultado = await productDao.saveObject(productToSave)
+    return resultado
 
 
     }
-const updateById = async (IdToUpdate) => {
-   const update = await productDao.updateById(IdToUpdate)
+const updateById = async (IdToUpdate, newProd) => {
+   const update = await productDao.updateById(IdToUpdate, newProd)
 return update
 }
 const deleteById = async (IdToDelete) => {

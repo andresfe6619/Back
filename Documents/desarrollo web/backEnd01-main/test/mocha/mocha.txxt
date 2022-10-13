@@ -1,0 +1,21 @@
+> andres-felipe@1.0.0 test
+> mocha ./test/mocha/mocha.js
+
+
+
+  test API
+    -GET /productos/Listado
+      ✔ should return 200 (314ms)
+    -POST /productos/agregar
+      ✔ should return 200 (266ms)
+      ✔ it should be ok with the product model
+      ✔ it should return created Prod
+      -PUT /api/productos/Listado/undefined
+        ✔ Should return 200 (214ms)
+        ✔ it should return the product updated
+      -DELETE /api/productos/Listado/undefined
+        ✔ it should return 200 (191ms)
+        ✔ it should return the deleted info
+
+
+  8 passing (1s)

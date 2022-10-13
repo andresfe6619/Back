@@ -10,14 +10,16 @@ const showAll = async(req, res) => {
             const prods = await productService.getAll()
             
             logger.info(prods)
-            res.render("products", {prods , hasAny :true})
+             res.send(prods)
+            // res.render("products", {prods , hasAny :true})
          
             
        
         } catch (error) {
             const prods = await productService.getAll()
             logger.error(error)
-            res.render("products", { hasAny : false})
+            res.send(error)
+            //res.render("products", { hasAny : false})
           
         
         
@@ -27,14 +29,16 @@ const showAll = async(req, res) => {
      router.use(bodyParser.json());
         router.use(bodyParser.urlencoded({ extended: true }));
     
-    const newProduct= (req, res) => {
+    const newProduct= async(req, res) => {
         try {
     
-         productService.saveObject(req.body);
+         const proof= await  productService.saveObject(req.body);
           logger.info("product saved")
-            res.redirect("/api/productos/Listado");
+           res.send(proof)
+          // res.redirect("/api/productos/Listado");
         } catch (error) {
             logger.error(error);
+           res.send(error)
         }
     };
     
@@ -69,12 +73,13 @@ const showAll = async(req, res) => {
     const deleteById= async(req, res) => {
         try {
             const {id} = req.params;
-            await productService.deleteById(id);
+            const proof = await productService.deleteById(id);
             logger.info(`El producto con id ${id} ha sido eliminado`)
-            res.json(`El producto con id ${id} ha sido eliminado`);
+            res.send(proof)
+            //res.json(`El producto con id ${id} ha sido eliminado`);
         }catch (error) {
-            logger.error(`No se encontró el id ${id}`, error.message)
-            res.json(`No se encontró el id ${id}`, error.message);
+            logger.error(`No se encontró el id `, error.message)
+            
         }
     }
      

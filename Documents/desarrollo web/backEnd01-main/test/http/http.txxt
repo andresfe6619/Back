@@ -1,0 +1,52 @@
+Trayendo productos metodo GET
+status code:200
+[
+  {
+    title: 'machete',
+    stock: 10,
+    price: 30,
+    id: '6346f0f62b416c3d34bc79e5',
+    arsPrice: 8700,
+    colPrice: 135360,
+    mexPrice: 600
+  },
+  {
+    title: 'machete',
+    stock: 10,
+    price: 30,
+    id: '6346f1aa6157e1fb4539554b',
+    arsPrice: 8700,
+    colPrice: 135360,
+    mexPrice: 600
+  },
+  {
+    title: 'machete',
+    stock: 10,
+    price: 30,
+    id: '6346f1e0b6e1fa3f3dc57e6d',
+    arsPrice: 8700,
+    colPrice: 135360,
+    mexPrice: 600
+  },
+  {
+    title: 'espada',
+    stock: 10,
+    price: 50,
+    id: '6346f1f4372c8e40556e8ca7',
+    arsPrice: 14500,
+    colPrice: 225600,
+    mexPrice: 1000
+  }
+]
+
+Agregando productos metodo POST
+status code:200
+{ _id: '634701dade5ac79fbc0b015a', __v: 0 }
+
+Actualizando productos metodo PUT
+status code: 200
+{id: '63470c1d87a1d4413d4756d7'}
+
+borrando producto metodo DELETE
+status code:200
+{ _id: '63470a220895ce0e943a9c00', __v: 0 }

@@ -11,8 +11,8 @@ import {logger} from "../../logs/loggers.js"
 let userDao =  usersSchema.getInstance()
 let productDao
 let CarroDao
-//switch (process.env.DATABASE)
-switch (process.argv[2])
+switch (process.env.DATABASE)
+//switch (process.argv[2])
 {
     case "mongo":
         const { default: ProductDaoMongo } = await import("./mongo/productos.dao.js");

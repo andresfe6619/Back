@@ -56,10 +56,10 @@ app.use((req, res, next)=>{
 // function comparePass(password, hash){
 //     return bcrypt.compareSync(password, hash);
 // }
-
-const expressServer= app.listen(process.env.PORT || port , (err) => {
+const puerto = process.env.PORT || port 
+const expressServer= app.listen(puerto , (err) => {
   if(!err){
-    logger.info(`Servidor corriendo en el puerto ${port}`);
+    logger.info(`Servidor corriendo en el puerto ${puerto}`);
   } else{
     logger.error("error iniciando el servidor")
   }

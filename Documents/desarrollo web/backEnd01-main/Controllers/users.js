@@ -10,29 +10,34 @@ function getLogin(req, res) {
     if (req.isAuthenticated()) {
       var user = req.user;
       logger.info("user logueado");
-      res.render("userForm", {
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-      });
+      res.send(user)
+      // res.render("userForm", {
+      //   username: user.username,
+      //   firstName: user.firstName,
+      //   lastName: user.lastName,
+      //   email: user.email,
+      // });
     } else {
       logger.warn("user NO logueado");
-      res.render("userForm");
+      res.send("usuario no logueado")
+      // res.render("userForm");
     }
   }
   
   function getSignup(req, res) {
-    res.render("register");
+    res.send("registro")
+    //res.render("register");
   }
   
   function postLogin(req, res) {
     var userSes = req.user;
     if (userSes) {
-        
-      res.render("userForm", {welcome: userSes.username, message: "bienvenido", Avatar: userSes.avatar, user: true} );}
+      res.send(userSes)
+      // res.render("userForm", {welcome: userSes.username, message: "bienvenido", Avatar: userSes.avatar, user: true} );
+    }
         else {
-            res.render("userForm", {welcome: "", user: false} );
+            res.send("no logeado")
+          // res.render("userForm", {welcome: "", user: false} );
         }
     }
  
@@ -42,9 +47,12 @@ function getLogin(req, res) {
     var userSes = req.user;
     if (userSes) {
         logger.info("has sido registrado")
-      res.render("register", {welcome: userSes.firstName , message: "has sido registrado", user: true} );}
+         res.send(userSes);
+        // res.render("register", {welcome: userSes.firstName , message: "has sido registrado", user: true} );
+      }
         else {
-            res.render("register", {welcome: "", user: false} );
+            res.send("no has podido ser registrado")
+          //res.render("register", {welcome: "", user: false} );
         }
     }
  
@@ -54,44 +62,50 @@ function getLogin(req, res) {
           next();
         } else {
           logger.warn("Authentication failed")
-          res.redirect("/api/users/inicio");
+          //res.redirect("/api/users/inicio");
         }
       }
   
   
   function getFaillogin(req, res) {
     logger.error("error en login");
-    res.render("fails", { message: "Error logueandose", user: true} );};
-  
+    res.send("error logueandose")
+    //res.render("fails", { message: "Error logueandose", user: true} );};
+  }
   
   function getFailsignup(req, res) {
     logger.error("error en signup");
-    res.render("fails", { message: "Error en el sign up", user: false} );
+    res.send("error en el sign up")
+    //res.render("fails", { message: "Error en el sign up", user: false} );
   }
   
   function getLogout(req, res) {
     logger.warn("logged out")
     req.session.destroy();
-    res.render("logout");
+    res.send("logged out")
+    //res.render("logout");
  
 }
   
   function failRoute(req, res) {
     logger.error(404 + "error")
-    res.status(404).render("Error");
+    res.status(404).send("Error");
   }
  function getDatos(req, res) {
     var userSes = req.user;
     
     if (userSes) {
        logger.info("usuario logueado"); 
-      res.render("userForm", {welcome:`nombre de usuario: ${userSes.username}` , message:`email : ${userSes.email}, `,
-      phone: `telefono: ${userSes.phone}`, Age: `edad: ${userSes.Age}`, firstName: `Nombre :${userSes.firstName}`, lastName: `Apellido: ${userSes.lastName}`,
-      Avatar: userSes.avatar,
-      Directions:`direccion: ${userSes.Direction}`,
-      user: true} );}
+      res.send(userSes)
+       // res.render("userForm", {welcome:`nombre de usuario: ${userSes.username}` , message:`email : ${userSes.email}, `,
+      // phone: `telefono: ${userSes.phone}`, Age: `edad: ${userSes.Age}`, firstName: `Nombre :${userSes.firstName}`, lastName: `Apellido: ${userSes.lastName}`,
+      // Avatar: userSes.avatar,
+      // Directions:`direccion: ${userSes.Direction}`,
+      // user: true} );
+    }
         else {
-            res.render("userForm", {welcome: "", user: false} );
+            res.send("error obteniendo datos del usuario")
+          //res.render("userForm", {welcome: "", user: false} );
         }
     }
 
