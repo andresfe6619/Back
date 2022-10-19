@@ -1,4 +1,5 @@
 import ContenedorMongo from "./mongoContenedor.js";
+import {logger} from "../../../logs/loggers.js"
 let instance
 class contenedorProds extends ContenedorMongo{
    constructor () {
@@ -11,6 +12,65 @@ class contenedorProds extends ContenedorMongo{
             codigo: { type: String, required: true },
          })
    }
+   async getByIdgraph(id){
+      try{
+         const doc= await this.collection.findOne({_id: id})
+         return doc
+      }catch(err){
+      logger.error(err)
+      } 
+   }
+   async getAllgraph(){
+      try{
+    const doc = await this.collection.find({})
+    return doc
+      }catch(err){
+         logger.error(err)
+      }
+    }
+   async createDocument(document){
+      try{
+    const doc = await this.collection.insertMany(document)
+    return doc[0]._id
+      }catch(err){
+         logger.error(err)
+      }}
+   async createProductGraph(data){
+      try{
+      const doc = await this.collection.insertMany(data)
+      return[0]
+
+      }catch(err){
+         logger.error(err)
+      }
+
+   }
+
+   async updateProductGraph(id, data) {
+      try{
+     const doc = await this.collection.updateOne({_id: id }, {$set: data});	
+     return doc
+
+      }catch(err){
+         logger.error(err)
+      }
+
+   }
+
+   async deleteByIdgraph(id){
+      try{
+      const doc = await this.collection.deleteOne({_id: id});
+      return doc
+   }catch(err){
+         logger.error(err)
+      }
+   }
+  
+
+
+
+
+
    static getInstance(){
       if (!instance) {
           instance= new contenedorProds();
