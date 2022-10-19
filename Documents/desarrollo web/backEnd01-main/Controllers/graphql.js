@@ -54,10 +54,12 @@ const updateProduct = async({id, datos}) => {
         logger.error(err)
     }
 }
-const deleteProduct = async(id) => {
+const deleteProduct = async({id}) => {
     try{
+    
     const deleteProd = await productDao.deleteByIdgraph(id)
-    return deleteProd 
+    
+    return deleteProd
     }catch(err){
         logger.error(err)
     }
@@ -65,21 +67,30 @@ const deleteProduct = async(id) => {
 
 //Consultas para hacer en graphiql:
 // {
-//     getProduct(id: "62dc6faea37be7f856862ba6") {
-//       title price stock thumbnail description
+//     getProd(id: "6347706175b676a012c54db6") {
+//       title price stock thumbnail descrip
 //     }
 //   }
   
 //   {
-//     getProducts{
+//     getProds{
 //       title price thumbnail
 //     }
 //   }
   
-//   mutation crearProductoNuevo {
-//     createProduct(datos: {title: "producto desde graphql", description: "este es el producto creado desde graphql", code: "codigo graphql", thumbnail: "thumbnail graphql", price: 1, stock: 1}) {
-//       id title description code thumbnail price stock
+//   mutation createProduct {
+//     createProd(datos: {title: "producto desde graphql", descrip: "este es el producto creado desde graphql", codigo: "codigo graphql", thumbnail: "thumbnail graphql", price: 1, stock: 1}) {
+//       id title descrip codigo thumbnail price stock
 //     }
 //   }
-
+//   mutation updateProduct {
+//     updateProd(id: "63476a7fa59e86e56593c81b", datos: {title: "producto desde graphql Actualizado", descrip: "este es el producto creado desde graphql", codigo: "codigo graphql", thumbnail: "thumbnail graphql", price: 1, stock: 1}) {
+//       id title descrip codigo thumbnail price stock
+//     }
+//   }
+//   mutation deleteProduct {
+//     deleteProd(id: "63476a7fa59e86e56593c81b") {
+//        title price stock thumbnail descrip
+//     }
+//   }
 export const productGraphl ={ getProduct, getProducts, createProduct, updateProduct, deleteProduct}

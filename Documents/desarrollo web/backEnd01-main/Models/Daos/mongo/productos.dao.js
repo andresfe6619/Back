@@ -9,7 +9,7 @@ class contenedorProds extends ContenedorMongo{
             thumbnail: { type: String, required: true },
             descrip: { type: String, required: true },          
             stock: { type: Number, required: true },                  
-            codigo: { type: String, required: true },
+            codigo: { type: String, required: false },
          })
    }
    async getByIdgraph(id){
@@ -38,7 +38,7 @@ class contenedorProds extends ContenedorMongo{
    async createProductGraph(data){
       try{
       const doc = await this.collection.insertMany(data)
-      return[0]
+      return doc[0]
 
       }catch(err){
          logger.error(err)
@@ -49,7 +49,8 @@ class contenedorProds extends ContenedorMongo{
    async updateProductGraph(id, data) {
       try{
      const doc = await this.collection.updateOne({_id: id }, {$set: data});	
-     return doc
+     
+     return id, data
 
       }catch(err){
          logger.error(err)
@@ -59,10 +60,12 @@ class contenedorProds extends ContenedorMongo{
 
    async deleteByIdgraph(id){
       try{
-      const doc = await this.collection.deleteOne({_id: id});
+         
+      const doc = await this.collection.deleteOne({_id: id}).clone();
+      
       return doc
    }catch(err){
-         logger.error(err)
+         console.log(err)
       }
    }
   
