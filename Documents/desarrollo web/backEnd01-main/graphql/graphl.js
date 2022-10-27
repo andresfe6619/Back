@@ -1,6 +1,6 @@
-import {buildSchema} from "graphql"
+import { buildSchema } from "graphql";
 
-const productSchema= buildSchema(`
+const productSchema = buildSchema(`
 input ProductInput {
     title:  String,
     price: Int,
@@ -29,4 +29,4 @@ type Mutation {
 }
 `);
 
-export default productSchema
+export default productSchema;

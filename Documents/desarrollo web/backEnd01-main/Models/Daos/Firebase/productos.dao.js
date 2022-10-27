@@ -1,19 +1,16 @@
 import ContenedorFirebase from "./firebaseContenedor.js";
-let instance 
+let instance;
 class ProductosFirebase extends ContenedorFirebase {
-    constructor() {
-        super("Productos");
+  constructor() {
+    super("Productos");
+  }
+
+  static getInstance() {
+    if (!instance) {
+      instance = new ProductosFirebase();
     }
-
-    static getInstance(){
-        if (!instance) {
-            instance= new ProductosFirebase();
-        
-        }
-        return instance ;
-
-
-}
+    return instance;
+  }
 }
 
 export default ProductosFirebase;

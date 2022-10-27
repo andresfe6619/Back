@@ -1,17 +1,15 @@
 import ContenedorFirebase from "./firebaseContenedor.js";
-let instance
+let instance;
 class FirebaseCart extends ContenedorFirebase {
-    constructor() {
-        super("Carrito");
+  constructor() {
+    super("Carrito");
+  }
+
+  static getInstance() {
+    if (!instance) {
+      instance = new FirebaseCart();
     }
-
-
-    static getInstance(){
-        if (!instance) {
-            instance= new FirebaseCart();
-        
-        }
-        return instance ;
-}
+    return instance;
+  }
 }
 export default FirebaseCart;

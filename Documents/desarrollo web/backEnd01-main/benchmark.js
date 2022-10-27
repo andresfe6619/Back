@@ -1,4 +1,4 @@
-import autocannon  from "autocannon";
+import autocannon from "autocannon";
 import { PassThrough } from "stream";
 
 function run(url) {
@@ -22,4 +22,3 @@ function run(url) {
 console.log("Running all benchmarks in parallel ...");
 
 run("http://localhost:8080/api/desafios/process");
-

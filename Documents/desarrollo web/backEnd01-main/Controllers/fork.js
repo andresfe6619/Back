@@ -1,17 +1,16 @@
-process.on("message", cantidad => {
-    const obj = {}
+process.on("message", (cantidad) => {
+  const obj = {};
 
-    for(let i = 0; i < cantidad; i++) {
-        const rand = Math.floor(Math.random() * 1000 + 1);
+  for (let i = 0; i < cantidad; i++) {
+    const rand = Math.floor(Math.random() * 1000 + 1);
 
-        if (obj.hasOwnProperty(rand)) {
-            obj[rand]++;
-        }
-         else {
-            obj[rand] = 1;
-        }
+    if (obj.hasOwnProperty(rand)) {
+      obj[rand]++;
+    } else {
+      obj[rand] = 1;
     }
+  }
 
-    process.send(obj);
-    process.exit()
-})
+  process.send(obj);
+  process.exit();
+});
