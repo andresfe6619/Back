@@ -5,7 +5,7 @@ const buildProdLogger = () => {
   const prodLogger = winston.createLogger({
     transports: [
       new winston.transports.File({
-        filename: "logs/warnings.log",
+        filename: "src/logs/warnings.log",
         level: "warn",
         format: winston.format.combine(
           winston.format.timestamp(),
@@ -13,7 +13,7 @@ const buildProdLogger = () => {
         ),
       }),
       new winston.transports.File({
-        filename: "logs/errors.log",
+        filename: "src/logs/errors.log",
         level: "error",
         format: winston.format.combine(
           winston.format.timestamp(),
@@ -30,7 +30,7 @@ const buildDevLogger = () => {
   const devLogger = winston.createLogger({
     transports: [
       new winston.transports.File({
-        filename: "logs/warnings.log",
+        filename: "src/logs/warnings.log",
         level: "warn",
         format: winston.format.combine(
           winston.format.timestamp(),
@@ -38,7 +38,7 @@ const buildDevLogger = () => {
         ),
       }),
       new winston.transports.File({
-        filename: "logs/errors.log",
+        filename: "src/logs/errors.log",
         level: "error",
         format: winston.format.combine(
           winston.format.timestamp(),

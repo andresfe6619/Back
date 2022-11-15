@@ -1,13 +1,12 @@
 import { port, mode } from "./yargs.js";
-import { saveCart } from "./Controllers/route-controller-dao/CartController.js";
 import express from "express";
-import { sendGmail } from "./services/Gmail-Wpp.js";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import os from "os";
 import cluster from "cluster";
 import MongoStore from "connect-mongo";
 import passport from "passport";
+import {normalizeM, denormalizeM} from "./services/normalizr.js"
 import { usersSchema } from "./Models/Daos/mongo/usersModel.js";
 import { userDao } from "./Models/Daos/indexDaoFactory.js";
 const app = express();
@@ -18,16 +17,15 @@ import { Server } from "socket.io";
 import rutas from "./Rutas/index.js";
 import { engine } from "express-handlebars";
 import path from "path";
-import { normalizeM, denormalizeM } from "./normalizr.js";
 import dotenv from "dotenv";
-dotenv.config({ path: ".env" });
-const puerto = process.env.PORT;
 import { contenedorProductos } from "./DB/MariaDB/contenedor.js";
 import chatDao from "./DB/mongoChat/ChatDao.js";
-const chat = new chatDao();
 import { logger } from "./logs/loggers.js";
 import compression from "compression";
-import { idAvatar, login, register } from "./services/users.service.js";
+import {login, register } from "./services/users.service.js";
+const chat = new chatDao();
+dotenv.config({ path: ".env" });
+
 if (process.env.MODE === "cluster" && cluster.isPrimary) {
   os.cpus().map(() => {
     cluster.fork();
@@ -44,15 +42,6 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
     logger.info(`New request: ${req.method} - ${req.path}`);
     next();
   });
-
-  //   function cryptPass(password){
-  //     const salt = bcrypt.genSaltSync(10);
-  //     return  bcrypt.hashSync(password, salt);
-  // }
-
-  // function comparePass(password, hash){
-  //     return bcrypt.compareSync(password, hash);
-  // }
   const puerto = process.env.PORT || port;
   const expressServer = app.listen(puerto, (err) => {
     if (!err) {
@@ -95,7 +84,7 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
 
   passport.deserializeUser((id, done) => {
     userDao.findName(id, done);
-    //userDao.findById(id, done);
+
   });
 
   app.use("/api", rutas);
@@ -107,61 +96,48 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
       .json({ error404: `Ruta no encontrada ${req.method} ${req.path}` });
   });
 
-  io.on("connection", async (socket) => {
-    logger.info("un cliente se ha conectado");
+  io.on("connection", async (socket) => { 
+    logger.info( "un cliente se ha conectado")
+  
+  const products = await contenedorProductos.getAll()
+  const messagePool= []
 
-    const products = await contenedorProductos.getAll();
-    const messages = await chat.getAll();
-    const nos = JSON.stringify(messages).length;
-    const normalize = normalizeM(messages);
-    const denormalize = denormalizeM(normalize);
-    const longitudNormalized = JSON.stringify(normalize).length;
-    const longitudDenormalized = JSON.stringify(denormalize).length;
-    const Optimization = (100 - (longitudNormalized * 100) / nos).toFixed();
-    console.log(longitudNormalized);
-    console.log(longitudDenormalized);
-    console.log(nos);
-    //console.log(`normalizados: ${JSON.stringify(normalize)}`)
-    socket.emit("server: productos", products);
-    socket.emit("server:mensajes", messages);
-    socket.emit("server:porcentajes", Optimization);
+  const messages = await chat.getAll()
+  messagePool.push(messages)
+  const nos=  JSON.stringify(messages).length
+  const normalize = normalizeM(messages)
+  const denormalize = denormalizeM(normalize)
+  const longitudNormalized = JSON.stringify(normalize).length;
+  const longitudDenormalized = JSON.stringify(denormalize).length;
+  const Optimization = (100- (longitudNormalized * 100) / nos).toFixed();   
 
-    socket.on("client: new product", async (product) => {
-      await contenedorProductos.save(product);
-
-      io.emit("server: productos", products);
-    });
-
-    socket.on("client:message", async (author12) => {
-      const message = {
-        author: {
-          id: author12.id,
-          nombre: author12.nombre,
-          apellido: author12.apellido,
-          edad: author12.edad,
-          alias: author12.alias,
-          avatar: author12.avatar,
-        },
-        Message: author12.Message,
-      };
-      logger.info(`Mensaje nuevo : ${message}`);
-
-      await chat.save(message);
-
-      io.emit("server:mensajes", messages);
-    });
-  });
+  socket.emit("server: productos", products)
+  socket.emit('server:mensajes', messagePool)
+  socket.emit("server:porcentajes", Optimization)
+  
+  socket.on ("client: new product", async product => {
+    await  contenedorProductos.save(product)
+     
+    io.emit("server: productos", products)})
+      
+  socket.on('client:message', async author12 => {
+    const message = {author: {id : author12.id , nombre: author12.nombre , apellido: author12.apellido , edad : author12.edad, alias: author12.alias , avatar: author12.avatar}, Message: author12.Message}
+  logger.info(`Mensaje nuevo : ${message}`)
+  
+  await chat.save(message) 
+  messagePool.push(message)  
+   io.emit('server:mensajes', messagePool)
+  
+  })
+  })
   //Handlebars
-  app.engine(
-    "hbs",
-    engine({
-      extname: ".hbs",
-      defaultLayout: path.join(__dirname, "./views/layouts/main.hbs"),
-      layoutsDir: path.join(__dirname, "./views/layout"),
-      partialsDir: path.join(__dirname, "./views/partials"),
-    })
-  );
-
-  app.set("views", path.join(__dirname, "./views"));
-  app.set("view engine", "hbs");
-}
+  app.engine('hbs', engine({
+      extname: '.hbs',
+      defaultLayout: path.join(__dirname, './views/layouts/main.hbs'),
+      layoutsDir: path.join(__dirname,  './views/layout'),
+      partialsDir: path.join(__dirname, './views/partials')
+  }))
+  
+  app.set('views', path.join(__dirname, './views'))
+  app.set('view engine', 'hbs')
+  }

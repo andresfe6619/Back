@@ -1,8 +1,12 @@
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import path from "path";
 import { logger } from "../logs/loggers.js";
-dotenv.config();
 import twilio from "twilio";
 import { createTransport } from "nodemailer";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path:__dirname+'.env'});
 const transporter = createTransport({
   service: "gmail",
   port: 587,
@@ -12,9 +16,8 @@ const transporter = createTransport({
   },
 });
 
-const accountSID = process.env.SID;
+const accountSID = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_AUTH;
-
 const client = twilio(accountSID, authToken);
 const sendWpp = async (body, to) => {
   const option = {
@@ -24,7 +27,7 @@ const sendWpp = async (body, to) => {
   };
 
   try {
-    const message = await client.messages.create(option);
+     await client.messages.create(option);
   } catch (error) {
     logger.error(error);
   }
@@ -38,6 +41,6 @@ const sendGmail = async (subject, html) => {
     html: html,
   };
 
-  const message = transporter.sendMail(mailOps);
+  await transporter.sendMail(mailOps);
 };
 export { transporter, sendWpp, sendGmail };

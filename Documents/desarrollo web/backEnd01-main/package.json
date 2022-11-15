@@ -46,8 +46,8 @@
   "type": "module",
   "scripts": {
     "setup": "curl -X GET 'http://localhost:8080/api/desafios/process'",
-    "test": " mocha ./test/suite/suite.js",
-    "start": "nodemon ./server.js"
+    "test": " mocha ./src/test/suite/suite.js",
+    "start": "nodemon ./src/server.js"
   },
   "repository": {
     "type": "git",
