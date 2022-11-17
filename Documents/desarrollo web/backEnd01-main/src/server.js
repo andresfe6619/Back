@@ -31,9 +31,9 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
   os.cpus().map(() => {
     cluster.fork();
   });
-  cluster.on("exit", (worker) => {
+    cluster.on("exit", (worker) => {
     logger.warn(
-      `Worker ${worker.process.pid} died, a new one is being created`
+    `Worker ${worker.process.pid} died, a new one is being created`
     );
     cluster.fork();
   });
