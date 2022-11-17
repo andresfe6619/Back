@@ -19,11 +19,9 @@ import { logger } from "./logs/loggers.js";
 import compression from "compression";
 import {login, register } from "./services/users.service.js";
 
-
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 dotenv.config({ path: ".env" });
 
 if (process.env.MODE === "cluster" && cluster.isPrimary) {
@@ -110,7 +108,7 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
   const denormalize = denormalizeM(normalize)
   const longitudNormalized = JSON.stringify(normalize).length;
   const longitudDenormalized = JSON.stringify(denormalize).length;
-  const Optimization = (100- (longitudNormalized * 100) / nos).toFixed();   
+  const Optimization = (100 - (longitudDenormalized * 100) / longitudNormalized).toFixed();   
   socket.emit("server: productos", products)
   socket.emit('server:mensajes', messages)
   socket.emit("server:porcentajes", Optimization)

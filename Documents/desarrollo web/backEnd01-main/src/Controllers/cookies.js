@@ -1,4 +1,5 @@
 import { logger } from "../logs/loggers.js";
+
 const newUser = async (req, res) => {
   try {
     logger.info("renderizando plantilla");

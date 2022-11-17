@@ -1,6 +1,7 @@
 import { logger } from "handlebars";
 import { databaseConnectionSQLite3 } from "../database.js";
 import { logger } from "../../logs/loggers.js";
+
 class Contenedor {
   constructor(table) {
     this.table = table;

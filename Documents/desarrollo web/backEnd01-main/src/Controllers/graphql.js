@@ -1,5 +1,6 @@
 import { productDao } from "../Models/indexDaoFactory.js";
 import { logger } from "../logs/loggers.js";
+
 const getProduct = async ({ id }) => {
   try {
     const product = await productDao.getByIdgraph(id);

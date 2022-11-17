@@ -5,6 +5,7 @@ import { Router } from "express";
 import carro from "./carro.js";
 import Productos from "./Productos.js";
 import Users from "./Users.js";
+
 const router = Router();
 let visitas = 0;
 router.use((req, res, next) => {

@@ -1,11 +1,12 @@
 //este es un sistema muy parecido al factory, sin decir que es el mismo, asi que unicamente lo dejé asi y añadí
 // el users
 import dotenv from "dotenv";
-dotenv.config({ path: ".env" });
-
 import { usersSchema } from "./Daos/mongo/usersModel.js";
 import { logger } from "../logs/loggers.js";
 import chat from "./Daos/mongo/chatDao.js"
+
+dotenv.config({ path: ".env" });
+
 let chatDao = new chat();
 let userDao = usersSchema.getInstance();
 let productDao;

@@ -1,6 +1,4 @@
 import { Router } from "express";
-const router = new Router();
-
 import checkAdmin from "../middlewares/chekAdmin.js";
 import {
   getAllFromCarro,
@@ -14,7 +12,7 @@ import {
 } from "../Controllers/route-controller-dao/CartController.js";
 import { checkAuthentication } from "../Controllers/route-controller-dao/users.js";
 
-
+const router = new Router();
 
 router.use(checkAuthentication);
 router.get("/Listado", getAllFromCarro);

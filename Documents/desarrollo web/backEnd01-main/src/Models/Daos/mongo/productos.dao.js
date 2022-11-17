@@ -1,5 +1,6 @@
 import ContenedorMongo from "./mongoContenedor.js";
 import { logger } from "../../../logs/loggers.js";
+
 let instance;
 class contenedorProds extends ContenedorMongo {
   constructor() {

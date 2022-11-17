@@ -1,6 +1,8 @@
 import winston from "winston";
 import dotenv from "dotenv";
+
 dotenv.config({ path: ".env" });
+
 const buildProdLogger = () => {
   const prodLogger = winston.createLogger({
     transports: [

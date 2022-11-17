@@ -1,4 +1,5 @@
 import ContenedorFirebase from "./firebaseContenedor.js";
+
 let instance;
 class ProductosFirebase extends ContenedorFirebase {
   constructor() {

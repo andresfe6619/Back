@@ -1,6 +1,5 @@
-import {Router } from "express";
+
 import {faker} from "@faker-js/faker";
-const router = new Router();
 import {logger} from "../logs/loggers.js"
 
 const test = async(req, res) => {

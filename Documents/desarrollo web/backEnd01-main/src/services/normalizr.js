@@ -1,10 +1,9 @@
 import {normalize, schema, denormalize} from "normalizr"
-
 import  util from "util"
-
+import {logger} from "../logs/loggers.js"
 
 function print(obj) {
-  console.log(util.inspect(obj, false, 12, true));
+logger.info(util.inspect(obj, false, 12, true));
 }
 
 function normalizeM(mensajes) {
@@ -30,7 +29,7 @@ function normalizeM(mensajes) {
         schemaMensajes)
 
    
-   
+
   return normalizedPost};
 
 function denormalizeM(recibido) {
@@ -65,7 +64,7 @@ function denormalizeM(recibido) {
 
    
     const mensajesDenormalizados = denormalized.mensajes.map(mensaje => mensaje._doc)
-print (mensajesDenormalizados);
+
 
 return { mensajesDenormalizados };
 

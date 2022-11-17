@@ -1,5 +1,4 @@
 import { Router } from "express";
-const router = new Router();
 import {
   showAll,
   newProduct,
@@ -13,6 +12,7 @@ import productSchema from "../graphql/graphl.js";
 import { productGraphl } from "../Controllers/graphql.js";
 import { checkAuthentication } from "../Controllers/route-controller-dao/users.js"
 
+const router = new Router();
 
 router.get("/Listado", showAll);
 router.get("/Listado/:id", filterId);

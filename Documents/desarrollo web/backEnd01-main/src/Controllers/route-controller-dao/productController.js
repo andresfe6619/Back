@@ -2,7 +2,9 @@ import { productService } from "../../services/Product.service.js";
 import bodyParser from "body-parser";
 import { Router } from "express";
 import { logger } from "../../logs/loggers.js";
+
 const router = new Router();
+
 const showAll = async (req, res) => {
   try {
     const prods = await productService.getAll();

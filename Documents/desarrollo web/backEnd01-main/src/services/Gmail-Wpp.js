@@ -4,6 +4,7 @@ import path from "path";
 import { logger } from "../logs/loggers.js";
 import twilio from "twilio";
 import { createTransport } from "nodemailer";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path:__dirname+'.env'});

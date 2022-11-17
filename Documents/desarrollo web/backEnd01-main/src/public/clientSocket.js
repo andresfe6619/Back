@@ -6,9 +6,9 @@ const  Add = document.querySelector("#Add")
 const  InputTitle = document.querySelector("#exampleInputEmail1")
 const  InputPrice = document.querySelector("#exampleInputPassword1")
 const  InputThumbnail = document.querySelector("#exampleInputPassword2")
- 
-
-
+const  InputStock = document.querySelector("#stock")
+const  InputCode = document.querySelector("#codigo")
+const  InputDescrip = document.querySelector("#descrip")
 
 function NewProduct(product) {
     socket.emit("client: new product", product)
@@ -32,7 +32,10 @@ function submitHandler (e) {
     const product = {
         title: InputTitle.value,
         price: InputPrice.value,
-        thumbnail: InputThumbnail.value
+        thumbnail: InputThumbnail.value,
+        stock: InputStock.value,
+        codigo:InputCode.value,
+        descrip:InputDescrip.value
     }
     NewProduct(product)
 }
@@ -60,9 +63,9 @@ const edad4 = document.querySelector('#edadinput')
 const alias5 = document.querySelector("#aliasinput")
 const avatar6 = document.querySelector('#avatarinput')
 const messageInput = document.querySelector('#messageInput')
-
 const messagesPool = document.querySelector('#messagesPool')
 const fecha = Date()
+
 function renderMessages(messagesInfo) {
         
         const html = messagesInfo.map(author1 => {

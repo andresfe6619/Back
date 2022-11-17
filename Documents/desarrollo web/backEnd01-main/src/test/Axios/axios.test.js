@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const instance = "http://localhost:8080/api/productos";
 
 const test = async () => {

@@ -1,4 +1,5 @@
 import ContenedorMongo from "./mongoContenedor.js";
+
 let instance;
 class CartMongo extends ContenedorMongo {
   constructor() {
