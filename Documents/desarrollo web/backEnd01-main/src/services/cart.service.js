@@ -1,4 +1,4 @@
-import { CarroDao } from "../Models/Daos/indexDaoFactory.js";
+import { CarroDao } from "../Models/indexDaoFactory.js";
 import Cotizador from "../DTO/cotizador.js";
 import productDTO from "../DTO/productDTO.js";
 

@@ -42,23 +42,12 @@ const getAllFromCarro = async (req, res) => {
     const prods = await CartService.getById(id);
 
     if ((prods.length = !0)) {
-      pedido = prods;
-      const products = JSON.stringify(prods);
-      res.send(products);
-      //res.render("carro",{prods: prods, pedido: products, Carro: id, hasAny: true  } );
+      pedido = JSON.stringify(prods);     
+      console.log(pedido);
+      res.render("carro",{prods: prods, Carro: id, hasAny: true  } );
     } else {
-      //let productos = JSON.stringify(resultado.productos)
-      //ArrayPedidos.push(prueba)
-      res.send("no hay productos");
-      //res.render("carrito", {hasAny: false })
-      // const  Pedido = document.querySelector("#Pedido")
-      // function submitHandler (e) {
-      //     e.preventDefault()
-      //     console.log("button is working")
-
-      // }
-      // Pedido.addEventListener("submit", submitHandler)
-      // }
+      res.render("carrito", {hasAny: false })
+   
     }
   } catch (error) {
     logger.error(
@@ -73,26 +62,29 @@ const order = async (req, res) => {
   res.redirect("/api/users/home");
 
   try {
-    const pedidos = JSON.stringify(pedido);
-    const body = `Hola, tienes un nuevo pedido del carrito con id : ${req.user.UserCart} y el pedido es: ${pedidos}`;
+
+    const body = `Hola, tienes un nuevo pedido del carrito con id : ${req.user.UserCart} y el pedido es:${pedido}`
+   
+
+ 
     if (req.user.phone === process.env.TO) {
-      const wpp = await sendWpp(body, req.user.phone);
+      await sendWpp(body, req.user.phone);
       logger.warn(
         "El numero proporcionado no es el numero registrado +573193129782"
       );
     } else {
       logger.info("enviando mensaje");
-      const wpp = await sendWpp(body, process.env.TO);
+      await sendWpp(body, process.env.TO);
     }
-
-    sendGmail(
+   
+    await sendGmail(
       "Nuevo pedido",
       `<div>Nombre de usuario : ${req.user.username}</div>
 <div>email : ${req.user.email}</div>
 <div>telefono : ${req.user.phone}</div>
 <div> Id del carro : ${req.user.UserCart}</div>
 <div>Direccion : ${req.user.Direction}</div>
-<div> Pedido(s):${pedidos} </div>
+<div> Pedido(s):${pedido} </div>
 `
     );
   } catch (error) {
@@ -102,7 +94,7 @@ const order = async (req, res) => {
 
 const terminarCompra = async (req, res) => {
   res.send("terminando compra");
-  //res.render("terminar")
+  res.render("terminar")
 };
 
 const addProductById = async (req, res) => {
@@ -123,7 +115,7 @@ const addProductById = async (req, res) => {
 };
 const adding = async (req, res) => {
   res.send("enviando");
-  //res.render("insertId")
+  res.render("insertId")
 };
 
 const deleteByIdCart = async (req, res) => {

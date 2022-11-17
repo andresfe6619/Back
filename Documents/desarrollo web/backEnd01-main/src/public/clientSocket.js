@@ -63,7 +63,6 @@ const messageInput = document.querySelector('#messageInput')
 
 const messagesPool = document.querySelector('#messagesPool')
 const fecha = Date()
-console.log(fecha)
 function renderMessages(messagesInfo) {
         
         const html = messagesInfo.map(author1 => {
@@ -97,7 +96,7 @@ socket.on('server:mensajes', renderMessages)
 // porcentajes
 
     socket.on("server:porcentajes", Number => {
-        console.log(Number)
+   
         document.querySelector("#porcentaje").innerHTML = `${Number}%`
        
     })

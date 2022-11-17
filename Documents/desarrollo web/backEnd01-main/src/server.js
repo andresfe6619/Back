@@ -8,7 +8,7 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 import {normalizeM, denormalizeM} from "./services/normalizr.js"
 import { usersSchema } from "./Models/Daos/mongo/usersModel.js";
-import { userDao } from "./Models/Daos/indexDaoFactory.js";
+import { userDao } from "./Models/indexDaoFactory.js";
 const app = express();
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -127,7 +127,7 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
   await chat.save(message) 
   messagePool.push(message)  
    io.emit('server:mensajes', messagePool)
-  
+ 
   })
   })
   //Handlebars

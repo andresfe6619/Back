@@ -1,19 +1,11 @@
-import express from "express";
-import Desafio from "./desafios.js";
-import moment from "moment";
-import fs from "fs";
 
+import moment from "moment";
+import Desafio from "./desafios.js"
 import { Router } from "express";
-const router = Router();
 import carro from "./carro.js";
 import Productos from "./Productos.js";
 import Users from "./Users.js";
-
-// router.get('/home', (req, res) => {
-//   //handlebars
-//     res.render("form")
-
-// });
+const router = Router();
 let visitas = 0;
 router.use((req, res, next) => {
   visitas++;
@@ -32,5 +24,5 @@ router.get("/fyh", (req, res) => {
 router.use("/productos", Productos);
 router.use("/carro", carro);
 router.use("/users", Users);
-router.use("/desafios", Desafio);
+router.use("/desafios", Desafio )
 export default router;

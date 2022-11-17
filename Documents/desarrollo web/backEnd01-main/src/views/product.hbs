@@ -1,0 +1,39 @@
+{{#if hasAny}}
+<table class="table table-dark table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titulo</th>
+       <th scope="col">StocK</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Imagen</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  
+   
+    <tr>
+      <th scope="row">{{id}}</th>
+      <td>{{title}}</td>
+      <td>{{stock}}</td>
+      <td>{{colPrice}}</td>
+      <td>
+      <img src={{thumbnail}} width="100" height="100"></img></td>
+    <td> <a action="submit" href="api/carro/agregar" class="btn btn-dark " tabindex="-1" role="button" aria-disabled="true"> comprar </a> </td>
+    </tr>
+
+  </tbody>
+</table> 
+<a href="/api/users/home" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" >volver atras </a> 
+<a href="/api/carro/Listado" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > ver mi carrito</a>
+{{else}}
+    
+    <div class="d-flex align-items-center">
+  <strong>el producto no existe o el ID es incorrecto </strong>
+  <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+</div>
+<div class="d-grid gap-2">
+<a href="/api/home" class="btn btn-dark " tabindex="-1" role="button" aria-disabled="true"> volver al inico</a> 
+</div>
+  {{/if}}

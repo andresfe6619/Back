@@ -1,4 +1,4 @@
-import { productDao } from "../Models/Daos/indexDaoFactory.js";
+import { productDao } from "../Models/indexDaoFactory.js";
 import Cotizador from "../DTO/cotizador.js";
 import productDTO from "../DTO/productDTO.js";
 
@@ -27,11 +27,29 @@ const getAll = async () => {
   return result;
 };
 
-const getById = async (cart) => {
-  const result = await productDao.getById(cart);
+const getById = async (id) => {
+  const product = await productDao.getById(id);
+    const currencies = {
+      arsPrice: cotizador.getCurrencyPrice(product.price, "ARS"),
+      colPrice: cotizador.getCurrencyPrice(product.price, "COL"),
+      mexPrice: cotizador.getCurrencyPrice(product.price, "MEX"),
+    };
+    const prod = {
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      thumbnai: product.thumbnail,
+      stock: product.stock,
+    };
+    
+    const filtered = new productDTO(prod, currencies); 
+     
+    return filtered
+   
+ 
+  };
 
-  return result;
-};
+
 const saveObject = async (productToSave) => {
   productToSave.timestamp = new Date().toLocaleString("fr-FR");
   const resultado = await productDao.saveObject(productToSave);

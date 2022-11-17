@@ -1,7 +1,7 @@
 import multer from "multer";
 import { Strategy as LocalStrategy } from "passport-local";
 import { sendGmail } from "../services/Gmail-Wpp.js";
-import { userDao } from "../Models/Daos/indexDaoFactory.js";
+import { userDao } from "../Models/indexDaoFactory.js";
 import { logger } from "../logs/loggers.js";
 import { CartService } from "./cart.service.js";
 var date = new Date();
@@ -76,7 +76,6 @@ const register = new LocalStrategy(
 const login = new LocalStrategy(async (username, password, done) => {
   try {
     const user = await userDao.findName(username);
-
     if (!user || !userDao.comparePass(password, user.password)) {
       return done(null, null);
     }
