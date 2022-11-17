@@ -6,7 +6,7 @@ const cotizador = new Cotizador();
 const getAll = async () => {
   const data = await CarroDao.getAll();
 
-  return data;
+  return data
 };
 const getById = async (cart) => {
   const data = await CarroDao.getById(cart);

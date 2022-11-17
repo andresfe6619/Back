@@ -12,7 +12,7 @@ import {
   order,
   terminarCompra,
 } from "../Controllers/route-controller-dao/CartController.js";
-import { checkAuthentication } from "../Controllers/users.js";
+import { checkAuthentication } from "../Controllers/route-controller-dao/users.js";
 
 
 

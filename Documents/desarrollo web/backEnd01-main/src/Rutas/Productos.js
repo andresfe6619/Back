@@ -13,7 +13,7 @@ import { graphqlHTTP } from "express-graphql";
 import productSchema from "../graphql/graphl.js";
 import { productGraphl } from "../Controllers/graphql.js";
 
-import { checkAuthentication } from "../Controllers/users.js"
+import { checkAuthentication } from "../Controllers/route-controller-dao/users.js"
 
 
 router.get("/Listado", showAll);

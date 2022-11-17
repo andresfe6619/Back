@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { logger } from "../logs/loggers.js";
+import { logger } from "../../logs/loggers.js";
 
 dotenv.config({ path: ".env" });
 

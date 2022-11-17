@@ -2,25 +2,14 @@ import express from "express";
 import passport from "passport";
 import { Router } from "express";
 import { fileURLToPath } from "url";
+//Dejé lo de las cookies en caso de que lo quiseras ver
+//import { newUser, result, destroyUser, checkCookie} from "../Controllers/cookies.js";
 import path from "path";
+import { upload } from "../services/users.service.js";
+import {getDatos, getLogin, postLogin, getFaillogin, getLogout, failRoute, getSignup, postSignup, getFailsignup, checkAuthentication,} from "../Controllers/route-controller-dao/users.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const router = new Router();
-// import { newUser, result, destroyUser, checkCookie} from "../Controllers/cookies.js";
-import { upload } from "../services/users.service.js";
-import {
-  getDatos,
-  getLogin,
-  postLogin,
-  getFaillogin,
-  getLogout,
-  failRoute,
-  getSignup,
-  postSignup,
-  getFailsignup,
-  checkAuthentication,
-} from "../Controllers/users.js";
 router
   .get("/inicio", getLogin)
   .post(
