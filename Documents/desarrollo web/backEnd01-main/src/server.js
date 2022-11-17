@@ -102,11 +102,11 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
   // Aqui el comentado esta con mariaDB en caso de que lo quieras usar pero yo prefiero mongo ante todo
     const products = await contenedorProductos.getAll()
   //const products = await productService.getAll()
-  const messagePool= []
+
  
   const messages = await chatDao.getAll()
-  console.log(messages)
-  messagePool.push(messages)
+
+
   const nos=  JSON.stringify(messages).length
   const normalize = normalizeM(messages)
   const denormalize = denormalizeM(normalize)
@@ -128,7 +128,7 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
   
     await chatDao.save(message) 
     const newMsg= await chatDao.getAll()
-    messagePool.push(message)  
+   
    io.emit('server:mensajes', newMsg)
  
   })
