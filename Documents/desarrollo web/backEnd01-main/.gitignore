@@ -1,4 +1,5 @@
 node_modules
 
 
-
+"express-graphql": "^0.12.0",
+ "graphql": "^16.6.0",
