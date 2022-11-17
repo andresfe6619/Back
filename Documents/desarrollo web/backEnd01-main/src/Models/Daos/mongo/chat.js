@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { mongoConnection } from "../database.js";
-import { logger } from "../../logs/loggers.js";
-mongoose.connect(mongoConnection);
+import configs from "../../../Connections/configs.js";
+import { logger } from "../../../logs/loggers.js";
+mongoose.connect(configs.mongodb.connectionString);
 
 class Chat {
   constructor(collectionName, schema) {
@@ -34,6 +34,7 @@ class Chat {
       return false;
     }
   }
+
 }
 
 export default Chat;

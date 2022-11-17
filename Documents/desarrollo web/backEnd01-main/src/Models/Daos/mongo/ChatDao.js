@@ -1,5 +1,5 @@
 import chat from "./chat.js";
-class ChatDao extends chat {
+class Chat extends chat {
   constructor() {
     super("chats", {
       author: {
@@ -14,4 +14,4 @@ class ChatDao extends chat {
     });
   }
 }
-export default ChatDao;
+export default Chat;

@@ -7,23 +7,24 @@ import cluster from "cluster";
 import MongoStore from "connect-mongo";
 import passport from "passport";
 import {normalizeM, denormalizeM} from "./services/normalizr.js"
-import { usersSchema } from "./Models/Daos/mongo/usersModel.js";
-import { userDao } from "./Models/indexDaoFactory.js";
-const app = express();
+import { userDao, chatDao } from "./Models/indexDaoFactory.js";
 import { fileURLToPath } from "url";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 import { Server } from "socket.io";
 import rutas from "./Rutas/index.js";
 import { engine } from "express-handlebars";
 import path from "path";
 import dotenv from "dotenv";
-import { contenedorProductos } from "./DB/MariaDB/contenedor.js";
-import chatDao from "./DB/mongoChat/ChatDao.js";
+import { productService } from "./services/Product.service.js";
+import { contenedorProductos } from "./Models/Daos/MariaDB/contenedor.js";
 import { logger } from "./logs/loggers.js";
 import compression from "compression";
 import {login, register } from "./services/users.service.js";
-const chat = new chatDao();
+
+
+const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 dotenv.config({ path: ".env" });
 
 if (process.env.MODE === "cluster" && cluster.isPrimary) {
@@ -98,11 +99,12 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
 
   io.on("connection", async (socket) => { 
     logger.info( "un cliente se ha conectado")
-  
-  const products = await contenedorProductos.getAll()
+  // Aqui el comentado esta con mariaDB en caso de que lo quieras usar pero yo prefiero mongo ante todo
+  //const products = await contenedorProductos.getAll()
+  const products = await productService.getAll()
   const messagePool= []
 
-  const messages = await chat.getAll()
+  const messages = await chatDao.getAll()
   messagePool.push(messages)
   const nos=  JSON.stringify(messages).length
   const normalize = normalizeM(messages)
@@ -124,7 +126,7 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
     const message = {author: {id : author12.id , nombre: author12.nombre , apellido: author12.apellido , edad : author12.edad, alias: author12.alias , avatar: author12.avatar}, Message: author12.Message}
   logger.info(`Mensaje nuevo : ${message}`)
   
-  await chat.save(message) 
+  await chatDao.save(message) 
   messagePool.push(message)  
    io.emit('server:mensajes', messagePool)
  

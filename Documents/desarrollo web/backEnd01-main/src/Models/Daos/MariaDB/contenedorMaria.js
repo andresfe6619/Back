@@ -1,6 +1,6 @@
-import fs from "fs";
-import { databaseConnection } from "../database.js";
-import { logger } from "../../logs/loggers.js";
+
+import  databaseConnection  from "../../../Connections/configs.js";
+import { logger } from "../../../logs/loggers.js";
 class Contenedor {
   constructor(table) {
     this.table = [table];

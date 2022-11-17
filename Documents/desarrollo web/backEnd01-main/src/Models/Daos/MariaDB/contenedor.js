@@ -1,7 +1,7 @@
 // contenedor principal de productos
 import Contenedor from "./contenedorMaria.js";
 const contenedorProductos = new Contenedor("productos");
-import { logger } from "../../logs/loggers.js";
+import { logger } from "../../../logs/loggers.js";
 
 const getAllProducts = (req, res) => {
   try {

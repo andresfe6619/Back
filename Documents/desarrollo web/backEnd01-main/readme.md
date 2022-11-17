@@ -1,11 +1,10 @@
-Backend Coderhouse - Desafío 21 - Clase 42: Testeamos nuestra api rest
-Consignas: Revisar en forma completa el proyecto entregable que venimos realizando, refactorizando y reformando todo lo necesario para llegar al esquema de servidor API RESTful en capas planteado en esta clase. Asegurarse de dejar al servidor bien estructurado con su ruteo / controlador, negocio, validaciones, persistencia y configuraciones (preferentemente utilizando en la codificación clases de ECMAScript). No hace falta realizar un cliente ya que utilizaremos tests para verificar el correcto funcionamiento de las funcionalidades desarrolladas.
+Hola Salva!, como estas?, espero que te encuentres muy bien, primero que nada quiero agradecerte por haber sido el profesor tan genial y paciente que fuiste, de verdad, uno de los mejores, disfruté mucho de la cursada contigo, espero algun dia ser igual de grandioso que tu, aqui dejaré un mini tutorial de mi proyecto que en si creo que todo es bastante explicito, aún asi, para acceder a las rutas es, api/usuarios/rutas de usuario, api/productos/rutas de productos, api/carro/rutas de carro, api/desafios/ rutas de desafios
 
-Desarrollar un cliente HTTP de pruebas que utilice Axios para enviar peticiones, y realizar un test de la funcionalidad hacia la API Rest de productos, verificando la correcta lectura de productos disponibles, incorporación de nuevos productos, modificación y borrado.
-Realizar el cliente en un módulo independiente y desde un código aparte generar las peticiones correspondientes, revisando los resultados desde la base de datos y en la respuesta del servidor obtenida en el cliente HTTP.
-Luego, realizar las mismas pruebas, a través de un código de test apropiado, que utilice mocha, chai y Supertest, para probar cada uno de los métodos HTTP de la API Rest de productos.
-Escribir una suite de test para verificar si las respuestas a la lectura, incorporación, modificación y borrado de productos son las apropiadas. Generar un reporte con los resultados obtenidos de la salida del test.
-Notas Los resultados de las pruebas fueron los siguientes: Todos los test se encuentran en la carpeta test:
+abajo dejo los resultados de los tests en caso de que les quieras dejar una ojeada
+
+Gracias por todo!
+
+
 
 Test	Carpeta
 Axios	/test/Axios/
