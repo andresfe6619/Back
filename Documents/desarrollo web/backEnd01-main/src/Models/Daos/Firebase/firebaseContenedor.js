@@ -98,6 +98,7 @@ class ContenedorFirebase {
     });
     return resultado;
   }
+
 }
 
 export default ContenedorFirebase;

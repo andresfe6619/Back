@@ -23,10 +23,10 @@ switch (process.env.DATABASE) {
     CarroDao = CartMongo.getInstance();
     logger.info("Mongo is working");
     break;
-  case "firebase":
+  case "firebase":   
     const { default: ProductDaoFirebase } = await import(
       "./Daos/Firebase/productos.dao.js"
-    );
+      );
     const { default: CartDaoFirebase } = await import(
       "./Daos/Firebase/carritos.dao.js"
     );

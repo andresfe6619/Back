@@ -1,5 +1,6 @@
-import chat from "./chat.js";
-class Chat extends chat {
+import chat from "./chat.js"
+import ContenedorMongo from "./mongoContenedor.js";
+class Chat extends ContenedorMongo {
   constructor() {
     super("chats", {
       author: {

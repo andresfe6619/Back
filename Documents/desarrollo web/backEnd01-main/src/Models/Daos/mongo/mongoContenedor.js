@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import configs from "../../../Connections/configs.js";
 
-let instance;
+
 mongoose.connect(configs.mongodb.connectionString);
 class contenedorMongo {
   constructor(coleccion, esquema) {
