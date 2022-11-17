@@ -100,11 +100,12 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
   io.on("connection", async (socket) => { 
     logger.info( "un cliente se ha conectado")
   // Aqui el comentado esta con mariaDB en caso de que lo quieras usar pero yo prefiero mongo ante todo
-  //const products = await contenedorProductos.getAll()
-  const products = await productService.getAll()
+    const products = await contenedorProductos.getAll()
+  //const products = await productService.getAll()
   const messagePool= []
-
+ 
   const messages = await chatDao.getAll()
+  console.log(messages)
   messagePool.push(messages)
   const nos=  JSON.stringify(messages).length
   const normalize = normalizeM(messages)
@@ -112,23 +113,23 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
   const longitudNormalized = JSON.stringify(normalize).length;
   const longitudDenormalized = JSON.stringify(denormalize).length;
   const Optimization = (100- (longitudNormalized * 100) / nos).toFixed();   
-
   socket.emit("server: productos", products)
-  socket.emit('server:mensajes', messagePool)
+  socket.emit('server:mensajes', messages)
   socket.emit("server:porcentajes", Optimization)
   
   socket.on ("client: new product", async product => {
     await  contenedorProductos.save(product)
-     
+    
     io.emit("server: productos", products)})
       
   socket.on('client:message', async author12 => {
     const message = {author: {id : author12.id , nombre: author12.nombre , apellido: author12.apellido , edad : author12.edad, alias: author12.alias , avatar: author12.avatar}, Message: author12.Message}
-  logger.info(`Mensaje nuevo : ${message}`)
+    logger.info(`Mensaje nuevo : ${message}`)
   
-  await chatDao.save(message) 
-  messagePool.push(message)  
-   io.emit('server:mensajes', messagePool)
+    await chatDao.save(message) 
+    const newMsg= await chatDao.getAll()
+    messagePool.push(message)  
+   io.emit('server:mensajes', newMsg)
  
   })
   })

@@ -1,5 +1,5 @@
 
-import  databaseConnection  from "../../../Connections/configs.js";
+import  databaseConnection  from "../../../Connections/MariaDB.js";
 import { logger } from "../../../logs/loggers.js";
 class Contenedor {
   constructor(table) {
@@ -20,22 +20,19 @@ class Contenedor {
 
   async saveById(id, objeto) {
     try {
-      const rid = await databaseConnection
-        .from(this.table)
-        .where("id", "=", id)
-        .update(objeto);
-      if (rid === 0) {
-        logger.error(`Producto de ID ${id} no encontrado`);
-        return { error: `Producto de ID ${id} no encontrado` };
-      } else {
-        logger.info(`Producto de ID ${id} actualizado`);
-        return { success: `Producto de ID ${id} actualizado` };
-      }
+        const rid = await databaseConnection.from(this.table).where('id', '=', id).update(objeto)
+        if (rid === 0) {
+           logger.error(`Producto de ID ${id} no encontrado`)
+            return { error: `Producto de ID ${id} no encontrado` }
+        } else {
+            logger.info(`Producto de ID ${id} actualizado`)
+            return { success:`Producto de ID ${id} actualizado`  }
+        }
     } catch (err) {
-      logger.error("Error guardando producto por ID. Code: ", err);
-      return { error: "error guardando producto" };
+        logger.error("Error guardando producto por ID. Code: ", err)
+        return {error: "error guardando producto"}
     }
-  }
+}
 
   async getById(id) {
     try {
