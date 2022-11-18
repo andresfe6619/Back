@@ -17,7 +17,7 @@ const getAll = async () => {
       id: product.id,
       title: product.title,
       price: product.price,
-      thumbnai: product.thumbnail,
+      thumbnail: product.thumbnail,
       stock: product.stock,
     };
     return new productDTO(prods, currencies);
@@ -29,7 +29,8 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const product = await productDao.getById(id);
-    const currencies = {
+
+  const currencies = {
       arsPrice: cotizador.getCurrencyPrice(product.price, "ARS"),
       colPrice: cotizador.getCurrencyPrice(product.price, "COL"),
       mexPrice: cotizador.getCurrencyPrice(product.price, "MEX"),

@@ -10,7 +10,7 @@ class contenedorProds extends ContenedorMongo {
       thumbnail: { type: String, required: true },
       descrip: { type: String, required: true },
       stock: { type: Number, required: true },
-      codigo: { type: String, required: false },
+      codigo: { type: String, required: true },
     });
   }
   async getByIdgraph(id) {

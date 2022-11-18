@@ -103,7 +103,6 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
   const messages = await chatDao.getAll()
 
 
-  const nos=  JSON.stringify(messages).length
   const normalize = normalizeM(messages)
   const denormalize = denormalizeM(normalize)
   const longitudNormalized = JSON.stringify(normalize).length;
@@ -133,7 +132,7 @@ if (process.env.MODE === "cluster" && cluster.isPrimary) {
   app.engine('hbs', engine({
       extname: '.hbs',
       defaultLayout: path.join(__dirname, './views/layouts/main.hbs'),
-      layoutsDir: path.join(__dirname,  './views/layout'),
+      layoutsDir: path.join(__dirname,  './views/layouts'),
       partialsDir: path.join(__dirname, './views/partials')
   }))
   

@@ -24,6 +24,6 @@ router.get("/fyh", (req, res) => {
 
 router.use("/productos", Productos);
 router.use("/carro", carro);
-router.use("/usuarios", Users);
+router.use("/users", Users);
 router.use("/desafios", Desafio )
 export default router;

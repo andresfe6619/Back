@@ -3,17 +3,17 @@ import  util from "util"
 import {logger} from "../logs/loggers.js"
 
 function print(obj) {
-logger.info(util.inspect(obj, false, 12, true));
+return(util.inspect(obj, false, 12, true));
 }
 
 function normalizeM(mensajes) {
   
-    const author = new schema.Entity("author");
+  const author = new schema.Entity("author");
 
   const mensaje = new schema.Entity(
     "mensaje",
     { author: author },
-    
+  
   );
 
   const schemaMensajes = new schema.Entity(
@@ -30,7 +30,9 @@ function normalizeM(mensajes) {
 
    
 
-  return normalizedPost};
+  return normalizedPost
+
+};
 
 function denormalizeM(recibido) {
     const author = new schema.Entity(
@@ -68,7 +70,7 @@ function denormalizeM(recibido) {
 
 return { mensajesDenormalizados };
 
-   return {denormalized};
+  
 }
 
 export  {normalizeM, denormalizeM};

@@ -15,7 +15,7 @@ import { checkAuthentication } from "../Controllers/route-controller-dao/users.j
 const router = new Router();
 
 router.get("/Listado", showAll);
-router.get("/Listado/:id", filterId);
+router.get("/Listado/:_id", filterId);
 router.use(checkAuthentication);
 router.use(checkAdmin);
 router.post("/agregar", newProduct);

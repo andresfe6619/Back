@@ -14,7 +14,7 @@ class contenedorMongo {
   }
 
   async getById(id) {
-    const doc = await this.collection.findById(id, { __v: 0 });
+    const doc = await this.collection.findById(id);
 
     return doc;
   }
@@ -25,7 +25,15 @@ class contenedorMongo {
 
     return nuevoElementoGuardado;
   }
-
+  async updateDocument(id, elemento){
+    try{
+      const doc = await this.collection.updateOne({_id: id}, {$set: elemento}) 
+      return doc
+    }catch(err){
+      console.log(err)}
+    }
+     
+  
   async updateById(id, elemento) {
     let resultado;
     await this.collection

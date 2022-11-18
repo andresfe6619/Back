@@ -8,7 +8,6 @@ const router = new Router();
 const showAll = async (req, res) => {
   try {
     const prods = await productService.getAll();
-
     logger.info(prods);
 
      res.render("products", {prods , hasAny :true})
@@ -39,11 +38,11 @@ const filterId = async (req, res) => {
 // Por alguna extraña razón el producto cuando lo dejo en res.json carga normal, pero cuando le haog res.render me saca error
 //del ID, pero en cuanto se reinicia por algun cambio carga la pagina con el producto correctamente (._. )  
   try {
-    const {id} = req.params;
-    const prod = await productService.getById(id);
-    logger.info(prod);
+    
+    const prod = await productService.getById(req.params);
+    
     //res.json(prod)
-    res.render("product", {id: id , title: prod.title, stock: prod.stock, colPrice: prod.colPrice, thumbnail: prod.thumbnail , hasAny :true})
+   res.render("product", {id: prod.id , title: prod.title, stock: prod.stock, colPrice: prod.colPrice, thumbnail: prod.thumbnail , hasAny :true})
   } catch (err) {
     logger.error(err);
     console.log(err)

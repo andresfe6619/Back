@@ -21,7 +21,7 @@ const deleteById = async (req, res) => {
     let resultado = await CartService.deleteById(req.params.id);
     if (!resultado) {
       logger.warn("El iddel carrito no existe");
-      res.send("El id de CartService no existe");
+      res.redirect("api/users/inicio")
     } else {
       logger.info("El carrito ha sido eliminado");
       res.sendStatus("el carrito ha sido eliminado");
@@ -41,13 +41,15 @@ const getAllFromCarro = async (req, res) => {
   try {
     const id = req.user.UserCart;
     const prods = await CartService.getById(id);
-
+    console.log(prods);
+    pedido = JSON.stringify(prods); 
     if ((prods.length = !0)) {
-      pedido = JSON.stringify(prods);     
-      console.log(pedido);
-      res.render("carro",{prods: prods, Carro: id, hasAny: true  } );
+        
+    
+     
+      res.render("carro",{prods,Carro: id, hasAny: true  } );
     } else {
-      res.render("carrito", {hasAny: false })
+      res.render("carro", {hasAny: false })
    
     }
   } catch (error) {
@@ -94,7 +96,7 @@ const order = async (req, res) => {
 };
 
 const terminarCompra = async (req, res) => {
-  res.send("terminando compra");
+
   res.render("terminar")
 };
 
@@ -102,20 +104,18 @@ const addProductById = async (req, res) => {
   try {
     const id = req.user.UserCart;
     const product = await productService.getById(req.body);
-
     let resultado = await CartService.saveInCart(id, product);
     logger.info(resultado);
     res.redirect("/api/carro/Listado");
   } catch (error) {
-    logger.error(
+    console.log(
       "Ocurrio el siguiente error al querer agregar productos al CartService",
       error
     );
-    res.sendStatus(500);
+    res.sendStatus("error");
   }
 };
 const adding = async (req, res) => {
-  res.send("enviando");
   res.render("insertId")
 };
 
@@ -126,7 +126,7 @@ const deleteByIdCart = async (req, res) => {
       req.params.id_prod
     );
     logger.info(resultado);
-    res.send(resultado);
+    res.redirect("api/carro/Listado");
   } catch (error) {
     logger.error(
       "Ocurrio el siguiente error al querer eliminar el producto del carrito",

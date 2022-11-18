@@ -21,11 +21,12 @@ const getById = async (cart) => {
       id: product.id,
       title: product.title,
       price: product.price,
-      thumbnai: product.thumbnail,
+      thumbnail: product.thumbnail,
       stock: product.stock,
     };
     return new productDTO(prods, currencies);
   });
+
   return result;
 };
 const saveCart = async (date) => {
@@ -42,10 +43,11 @@ const deleteById = async (IdToDelete) => {
 const saveInCart = async (idCart, product) => {
   let cart = await CarroDao.getById(idCart);
   let resultado;
+ 
   if (cart) {
     //elemento._id  = tempCart.productos.length + 1;
     cart.productos.push(product);
-    await CarroDao.updateById(idCart, cart);
+    await CarroDao.updateDocument(idCart, cart);
     resultado = `Producto : ${product.title},  ha sido añadido correctamente al cart con ID ${idCart}`;
   } else {
     resultado = "El id de carrito no existe";
@@ -62,7 +64,7 @@ const eraseFromCart = async (idCart, idProduct) => {
     console.log("indice : ", index);
     if (index >= 0) {
       arrayProducts.splice(index, 1);
-      await carroDao.eraseFromCart(idCart, arrayProducts);
+      await CarroDao.eraseFromCart(idCart, arrayProducts);
       resultado = `Producto con ID ${idProduct}, eliminado correctamente del cart con ID ${idCart}`;
     } else {
       resultado = "El carrito es correcto pero el producto no existe";
