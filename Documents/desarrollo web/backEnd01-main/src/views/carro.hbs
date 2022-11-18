@@ -27,12 +27,16 @@
   {{/each}}
   </tbody>
 </table> 
-<form action="/api/carro/terminar" enctype="multipart/form-data" method="POST">
-      
-<a href="/api/carro/agregar" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > agregar productos </a> 
+<div>
+<form action="/api/carro/Listado" enctype="multipart/form-data" method="POST">
+ <a href="/api/carro/agregar" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > agregar productos </a> 
  <a href="/api/carro/eliminar" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > Eliminar productos </a>    
+ <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">Vaciar carrito</button>
+ </form>
+ <form action="/api/carro/terminar" enctype="multipart/form-data" method="POST">     
   <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">comprar</button>
 </form> 
+</div>
 {{else}}
       
    <h2>Aun no tienes productos en tu carrito </h2>

@@ -1,5 +1,7 @@
 Hola Salva!, como estas?, espero que te encuentres muy bien, primero que nada quiero agradecerte por haber sido el profesor tan genial y paciente que fuiste, de verdad, uno de los mejores, disfruté mucho de la cursada contigo, espero algun dia ser igual de grandioso que tu, aqui dejaré un mini tutorial de mi proyecto que en si creo que todo es bastante explicito, aún asi, para acceder a las rutas es, api/users/rutas de usuario, api/productos/rutas de productos, api/carro/rutas de carro, api/desafios/ rutas de desafios
 
+para añadir productos al carrito copias su id y lo introduces en el input de api/carro/agregar o para eliminar api/carro/eliminar
+
 abajo dejo los resultados de los tests en caso de que les quieras dejar una ojeada
 
 Gracias por todo!

@@ -8,14 +8,15 @@ import {
   adding,
   order,
   terminarCompra,
-  deleting
+  deleting,
+  emptyCart
 } from "../Controllers/route-controller-dao/CartController.js";
 import { checkAuthentication } from "../Controllers/route-controller-dao/users.js";
 
 const router = new Router();
 
 router.use(checkAuthentication);
-router.get("/Listado", getAllFromCarro);
+router.get("/Listado", getAllFromCarro).post("/Listado", emptyCart)
 router.get("/agregar", adding).post("/agregar", addProductById);
 router.get("/terminar", terminarCompra).post("/terminar", order);
 router.get("/eliminar",  deleting).post("/eliminar", deleteByIdCart);

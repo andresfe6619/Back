@@ -58,16 +58,20 @@ const getAllFromCarro = async (req, res) => {
     res.sendStatus(500);
   }
 };
-
+//De aqui sale el correo con el pedido
 const order = async (req, res) => {
-  res.redirect("/api/users/home");
+ res.redirect("terminar")
 
   try {
-
+    var user = req.user.UserCart
+     await CartService.eraseFromCart(
+      user,
+      "erase"
+    );
     const body = `Hola, tienes un nuevo pedido del carrito con id : ${req.user.UserCart} y el pedido es:${pedido}`
    
 
- 
+  
     if (req.user.phone === process.env.TO) {
       await sendWpp(body, req.user.phone);
       logger.warn(
@@ -92,7 +96,7 @@ const order = async (req, res) => {
     logger.error(error);
   }
 };
-
+//Aqui se reenderiza la pagina de terminar compra
 const terminarCompra = async (req, res) => {
 
   res.render("terminar")
@@ -143,7 +147,23 @@ const deleting= async (req, res) => {
   res.render("delete")
 
 };
+const emptyCart = async (req, res) => {
+  var user = req.user.UserCart
+  try {
+    let resultado = await CartService.eraseFromCart(
+      user,
+      "erase"
+    );
 
+    logger.info(resultado);
+    res.redirect("Listado")
+  } catch (error) {
+    logger.error(
+      "Ocurrio el siguiente error al querer vaciar el carrito",
+      error
+    );
+    res.sendStatus(500);
+  }}
 export {
   getAllFromCarro,
   addProductById,
@@ -153,5 +173,6 @@ export {
   adding,
   order,
   terminarCompra,
-  deleting
+  deleting,
+  emptyCart
 };
