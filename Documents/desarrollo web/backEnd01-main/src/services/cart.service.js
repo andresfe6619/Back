@@ -58,19 +58,16 @@ const saveInCart = async (idCart, product) => {
 const eraseFromCart = async (idCart, idProduct) => {
   let resultado;
   let tempCart = await CarroDao.getById(idCart);
+
   if (tempCart) {
     let arrayProducts = tempCart.productos;
-    let index = arrayProducts.findIndex((x) => x._id == idProduct);
-    console.log("indice : ", index);
-    if (index >= 0) {
-      arrayProducts.splice(index, 1);
-      await CarroDao.eraseFromCart(idCart, arrayProducts);
-      resultado = `Producto con ID ${idProduct}, eliminado correctamente del cart con ID ${idCart}`;
+    const newCartProducts = arrayProducts.filter(product => product.id !== idProduct.id )
+    
+     await CarroDao.eraseFromCart(idCart, newCartProducts)
+    console.log(newCartProducts)
+     resultado = `El producto con id ${idProduct.id} ha sido eliminado` 
     } else {
-      resultado = "El carrito es correcto pero el producto no existe";
-    }
-  } else {
-    resultado = "El carrito no existe";
+    resultado = `Ha ocurrido un error borrando el producto`;
   }
   return resultado;
 };

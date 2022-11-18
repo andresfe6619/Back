@@ -29,12 +29,13 @@
 </table> 
 <form action="/api/carro/terminar" enctype="multipart/form-data" method="POST">
       
-
+<a href="/api/carro/agregar" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > agregar productos </a> 
+ <a href="/api/carro/eliminar" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > Eliminar productos </a>    
   <button type="submit" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" value="send">comprar</button>
 </form> 
 {{else}}
       
    <h2>Aun no tienes productos en tu carrito </h2>
 <a href="/api/productos/Listado" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true" > ir de compras </a> 
-
+  
       {{/if}}

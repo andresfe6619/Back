@@ -45,8 +45,6 @@ const getAllFromCarro = async (req, res) => {
     pedido = JSON.stringify(prods); 
     if ((prods.length != 0)) {
         
-    
-      console.log(prods.length);
       res.render("carro",{prods ,Carro: id, hasAny: true  } );
     } else {
       res.render("carro", {hasAny: false })
@@ -115,18 +113,18 @@ const addProductById = async (req, res) => {
     res.sendStatus("error");
   }
 };
-const adding = async (req, res) => {
-  res.render("insertId")
-};
+
 
 const deleteByIdCart = async (req, res) => {
+  var user = req.user.UserCart
   try {
     let resultado = await CartService.eraseFromCart(
-      req.params.id,
-      req.params.id_prod
+      user,
+      req.body
     );
+
     logger.info(resultado);
-    res.redirect("api/carro/Listado");
+    res.redirect("Listado")
   } catch (error) {
     logger.error(
       "Ocurrio el siguiente error al querer eliminar el producto del carrito",
@@ -134,6 +132,16 @@ const deleteByIdCart = async (req, res) => {
     );
     res.sendStatus(500);
   }
+};
+const adding = async (req, res) => {
+  
+  res.render("insertId")
+
+};
+const deleting= async (req, res) => {
+  
+  res.render("delete")
+
 };
 
 export {
@@ -145,4 +153,5 @@ export {
   adding,
   order,
   terminarCompra,
+  deleting
 };
