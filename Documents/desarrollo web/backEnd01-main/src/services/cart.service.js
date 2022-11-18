@@ -45,7 +45,7 @@ const saveInCart = async (idCart, product) => {
   let resultado;
  
   if (cart) {
-    //elemento._id  = tempCart.productos.length + 1;
+   
     cart.productos.push(product);
     await CarroDao.updateDocument(idCart, cart);
     resultado = `Producto : ${product.title},  ha sido añadido correctamente al cart con ID ${idCart}`;

@@ -41,13 +41,13 @@ const getAllFromCarro = async (req, res) => {
   try {
     const id = req.user.UserCart;
     const prods = await CartService.getById(id);
-    console.log(prods);
+   
     pedido = JSON.stringify(prods); 
-    if ((prods.length = !0)) {
+    if ((prods.length != 0)) {
         
     
-     
-      res.render("carro",{prods,Carro: id, hasAny: true  } );
+      console.log(prods.length);
+      res.render("carro",{prods ,Carro: id, hasAny: true  } );
     } else {
       res.render("carro", {hasAny: false })
    
