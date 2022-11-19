@@ -5,6 +5,7 @@ import {
   filterId,
   updateById,
   deleteById,
+ 
 } from "../Controllers/route-controller-dao/productController.js";
 import checkAdmin from "../middlewares/chekAdmin.js";
 import { graphqlHTTP } from "express-graphql";
@@ -20,7 +21,7 @@ router.use(checkAuthentication);
 router.use(checkAdmin);
 router.post("/agregar", newProduct);
 router.put("/Listado/:id", updateById);
-router.delete("/Listado/:id", deleteById);
+router.get("/eliminar/:id", deleteById)
 router.use(
   "/graphql",
   graphqlHTTP({

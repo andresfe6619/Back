@@ -24,7 +24,7 @@ const deleteById = async (req, res) => {
       res.redirect("api/users/inicio")
     } else {
       logger.info("El carrito ha sido eliminado");
-      res.sendStatus("el carrito ha sido eliminado");
+      res.render("eliminar",{Mensaje : "Carrito Eliminado"});
     }
   } catch (error) {
     logger.error(

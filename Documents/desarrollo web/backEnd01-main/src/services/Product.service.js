@@ -61,8 +61,8 @@ const updateById = async (IdToUpdate, newProd) => {
   return update;
 };
 const deleteById = async (IdToDelete) => {
-  const Deleted12 = await productDao.deleteById(IdToDelete);
-  return Deleted12;
+  const Deleted = await productDao.deleteById(IdToDelete);
+  return Deleted;
 };
 
 export const productService = {

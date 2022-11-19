@@ -61,14 +61,12 @@ const updateById = async (req, res) => {
     logger.error(error);
   }
 };
-
 const deleteById = async (req, res) => {
   try {
     const { id } = req.params;
     const proof = await productService.deleteById(id);
     logger.info(`El producto con id ${id} ha sido eliminado`);
-    res.send(`El producto con id ${id} ha sido eliminado`)
-    //res.render("eliminar")
+    res.render("eliminar",{Mensaje: "Producto eliminado"})
   } catch (error) {
     logger.error(`No se encontró el id `, error.message);
   }
